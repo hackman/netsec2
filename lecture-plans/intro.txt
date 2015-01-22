@@ -1,0 +1,25 @@
+- Intro
+- Programming languages (interpretative and compiled)
+- Types of attacks
+  - overflow
+	- stack
+	- heap
+	- integer
+	- memory allocation 
+	- underflow
+	- off by one
+  - injection
+	- format string
+	- path
+	- shell
+	- sql
+	- code
+	- XSS
+	- CSRF
+	- Unicode
+  - logical
+	- DNS
+	- Timing (password brute-forcing)
+	- Crypto
+- Denial of servic
+- Input validation

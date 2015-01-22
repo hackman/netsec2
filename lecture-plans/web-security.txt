@@ -1,0 +1,5 @@
+- XSS
+- CSRF
+- Hijacking
+  - cookies
+  - domains

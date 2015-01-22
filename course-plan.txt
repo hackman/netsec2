@@ -1,0 +1,43 @@
+Week 1
+- Intro
+- Programming languages (interpretative and compiled)
+- Types of attacks
+- Denial of servic
+- Input validation
+Week 2 
+- Input validation 
+- Race conditions (Krosnov)
+Week 3
+- Stack overflow
+- Shellcode
+- Heap overflow
+- Memory allocator 
+- Stack canarry 
+- ASLR
+- NX
+- Return oriented programming
+- Integer overflows
+- Uninitialized data
+Week 4
+Unix Security
+Week 5
+Windows Security
+Week 6
+Android & iOS
+Week 7
+- Java
+- C#
+Week 8
+- PHP
+- Perl/Python/Ruby
+Week 9
+WEB Security
+Week 10
+Demo
+Week 11
+Misc
+- Packet in packet injection
+- ???
+Week 12
+- Crypto
+- Defensive Programming

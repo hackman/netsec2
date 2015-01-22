@@ -1,0 +1,3 @@
+- Race conditions
+  - non re-entrent functions (DB, Shared mem, files)
+  - mutex/spinlock/RCU

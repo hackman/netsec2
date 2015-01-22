@@ -1,0 +1,17 @@
+- Stack overflow
+- Shellcode
+  - arch (ARM, i386, x86-64)
+  - NOP, JMP
+- Heap overflow
+- Memory allocator 
+  - how to use double free 
+  - use after free
+  - overwrite memory allocator structure
+- Stack canarry 
+- ASLR
+- NX
+- Return oriented programming
+- Integer overflows
+  - type conversion
+  - sign extension
+- Uninitialized data

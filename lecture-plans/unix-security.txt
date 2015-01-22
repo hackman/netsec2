@@ -1,0 +1,4 @@
+- Kernel level exploits
+- Dropping privileges
+- Working with capabilities
+- Linker issues

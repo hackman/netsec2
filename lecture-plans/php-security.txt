@@ -1,0 +1,5 @@
+  - SQL
+  - Shell
+  - Code
+  - Hash implementation(collisions)
+  - general language issues
