@@ -1,4 +1,6 @@
 - Kernel level exploits
-- Dropping privileges
-- Working with capabilities
 - Linker issues
+- Dropping privileges (setuid, initgroups, setresuid...)
+- Working with capabilities
+- Namespaces & chroot
+- Filesystem ACLs
