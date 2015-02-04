@@ -1,43 +1,139 @@
-Week 1
+Weeks
+1 Intros
+2 Types of attacks
+3 Script languages
+4 Script languages & Web
+5 Web & Exam
+6 Compiled languages
+7 Compiled languages
+8 C# & Java
+9 Unix/Linux security
+10 Windows
+
+1 (ALL)
 - Intro
 - Programming languages (interpretative and compiled)
 - Types of attacks
-- Denial of servic
-- Input validation
-Week 2 
-- Input validation 
-- Race conditions (Krosnov)
-Week 3
-- Stack overflow
-- Shellcode
-- Heap overflow
-- Memory allocator 
-- Stack canarry 
-- ASLR
-- NX
-- Return oriented programming
-- Integer overflows
-- Uninitialized data
-Week 4
-Unix Security
-Week 5
-Windows Security
-Week 6
-Android & iOS
-Week 7
-- Java
-- C#
-Week 8
-- PHP
-- Perl/Python/Ruby
-Week 9
-WEB Security
-Week 10
-Demo
-Week 11
-Misc
-- Packet in packet injection
-- ???
-Week 12
+  - injection
+- format string
+- path
+- shell
+- sql
+- code
+- XSS
+- CSRF
+- Unicode
+  - overflow
+- stack
+- heap
+- integer
+- memory allocation
+- underflow
+- off by one
+  - logical
+- DNS
+- Timing (password brute-forcing)
 - Crypto
-- Defensive Programming
+- Denial of service
+- Input validation
+2  Types of attacks
+- Input validation
+  - Protocol complexity(state machine, turing complete) (ManiaX)
+  - Environment (Marian)
+  - Direct input (Marian)
+- Race conditions (Marian)
+  - non re-entrent functions (DB, Shared mem, files)
+  - mutex/futex/spinlock/RCU/fcntl
+  - acter model (no shared resources architecture)
+- Timing
+3 Script languages
+General problems in script languages
+- Hash implementation(collisions) (ManiaX)
+- SQL (ManiaX)
+- Code (Marian)
+- Weektyping
+- PHP (Marian)
+  - SQL
+  - Code
+  - Shell
+  - general language issues
+- Ruby (Petko)
+- Perl (Marian)
+  - SQL
+  - Shell
+  - Code
+  - general language issues
+4 Script languages
+- Python (Kiro)
+- Bash (Marian)
+- JavaScript (Joan)
+- Web
+5 Web
+WEB (Petko)
+- XSS
+- CSRF
+- Hijacking
+  - cookies
+  - domains
+- Exams
+6 Compiled languages
+- Shellcode
+  - arch (ARM, i386, x86-64) ManiaX
+    - ARM 32/64
+    - i386/x86-64
+  - NOP, JMP HackMan
+  - shellcode HackMan
+  - return oriented programming HackMan
+7 Compiled languages
+- Stack overflow HackMan
+- Heap overflow HackMan
+- Memory allocator HackMan
+  - how to use double free
+  - use after free
+  - overwrite memory allocator structure
+
+- Stack canarry HackMan
+- ASLR HackMan
+- NX HackMan
+- Integer overflows ManiaX
+  - type conversion
+  - sign extension
+- Uninitialized data ManiaX
+8 C# & Java
+- C#(Joan)
+  - SQL
+  - Shell
+  - Code
+  - general language issues
+- Java (da vidq predlojenieto na Nakov)
+  - SQL
+  - Shell
+  - Code
+  - Hash implementation(collisions)
+  - general language issues
+- Exams
+9 Linux (Marian)
+- Kernel level exploits
+- proper setuid
+- linker
+- capabilities
+- namespaces
+- chroot
+10 Windows
+Windows (Bobi)
+11
+Demo
+12
+- Crypto (ManiaX)
+- Defensive Programming (Marian)
+Misc
+- Packet in packet injection (ManiaX)
+- ???
+
+
+Find security issues with the following software:
+- Moodle
+- Joomla
+- WordPress
+- Linux Kernel
+Every proven security issue is elidgable for 1 to 3 points.
