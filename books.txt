@@ -1,0 +1,6 @@
+Books that are related to the things we discuss in this course:
+
+  The Art of Software Security Assesment
+  Maximum Security
+  Hacking Exposed *
+  Security Warrior
