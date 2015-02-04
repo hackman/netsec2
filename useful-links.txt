@@ -1,0 +1,15 @@
+http://www.dwheeler.com/secure-programs/
+http://arstechnica.com/cpu/index.html
+http://www.php.net/manual/en/security.php
+http://www.securereality.com.au/studyinscarlet.txt
+http://www.perldoc.com/perl5.6/pod/perlsec.html
+http://www.insecure.org/news/P55-07.txt
+http://www.securiteam.com/securityreviews/5DP0N1P76E.html
+http://www.owasp.org/asac/input_validation/sql.shtml
+http://www.cs.columbia.edu/~akonstan/presentations/java-security/html/
+http://msdn.microsoft.com/library/default.asp?url=/nhp/Default.asp?contentid=28001369
+http://msdn.microsoft.com/vstudio/techinfo/articles/developerproductivity/frameworksec.asp
+
+http://guides.rubyonrails.org/security.html
+http://php.net/manual/en/security.php
+http://treinamentoinfoco.com.br/wp-content/uploads/2014/01/PHP.Architectnanobooks.PHP_.Architects.Guide_.to_.PHP_.Security.2005.LotB_.pdf
