@@ -3,13 +3,13 @@
 % Vasil Kolev \<vasil@ludost.net\>
 
 # SQL injection
-
 ## SQL
 ### Описание
 
 * Език за разговори с бази данни
 * SELECT user, password FORM users WHERE username='admin'
 * Почти истински език за програмиране
+
 
 ### Употреба
 
@@ -25,38 +25,86 @@
 
 ### Пример
 
-~~~
-# Никога не пишете такъв код
+~~~~~~PHP
+# НИКОГА не пишете такъв код
 $user = $_GET['user'];
 $pass = $_GET['pass'];
 
 $res = mysql_query("SELECT count(*) FROM users "\
-       "WHERE username='".$user"' AND pass='".$pass."';");
-~~~
+"WHERE username='".$user"' AND pass='".$pass."';");
+~~~~~~
 
 ### нормално изпълнение
-~~~
+~~~~~~PHP
 $user="admin";
 $pass="tmp";
-"SELECT count(*) FROM users "\
-       "WHERE username='admin' AND pass='tmp';
-~~~
+~~~~~~
+~~~~~~SQL
+  SELECT count(*) FROM users
+  WHERE username='admin' AND pass='tmp';
+~~~~~~
 
 ### по-весело изпълнение
-~~~
+~~~~~~PHP
 $user="admin";
 $pass="' OR ''='";
-"SELECT count(*) FROM users "\
-       "WHERE username='admin' AND pass='' OR ''='';
-~~~
+~~~~~~
+~~~~~~SQL
+  SELECT count(*) FROM users 
+  WHERE username='admin' AND pass='' OR ''='';
+~~~~~~
 
 ### и леко тъжно такова
-~~~
+~~~~~~PHP
 $user="admin";
-$pass="'; DROP table users; --";
-"SELECT count(*) FROM users "\
-       "WHERE username='admin' AND pass='tmp'; DROP table users;--'
-~~~
+$pass="'; DROP table users;\n --";
+~~~~~~
+~~~~~~SQL
+  SELECT count(*) FROM users
+  WHERE username='admin' AND pass='tmp';
+  DROP table users;--'
+~~~~~~
 
 ### little Bobby tables
 ![exploits_of_a_mom](exploits_of_a_mom.png)
+
+## Защо е възможно
+
+### Как може да има такива неща?
+
+* Смесица на два езика с различни правила
+* Липса на мисъл за какво има във входните данни
+* Специални символи
+
+### Специални символи
+
+* Единична кавичка '
+* Двойна кавичка "
+* Коментар --
+* Точка и запетая ;
+* Нов ред \\n
+* backslash \\
+
+## Решения
+
+### филтрация
+
+* Изтриване на всички съмнителни символи
+* Понякога са валидни!
+
+### escape
+
+* Най-най-най простото решение:
+* Добавяне на \\ пред всички специални символи
+
+### Prepared statements
+
+* Зависи от езика, но:
+
+~~~~~~PHP
+$stmt = $c->prepare("SELECT COUNT(*) FROM users \
+            WHERE username=:u AND pass=:p");
+$stmt->bindParam(':u', $user);
+$stmt->bindParam(':p', $pass);
+$res = $stmt->execute();
+~~~~~~
