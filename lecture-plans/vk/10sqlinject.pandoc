@@ -1,0 +1,62 @@
+% SQL injection
+% или какво-прави-тая-кавичка-тука
+% Vasil Kolev \<vasil@ludost.net\>
+
+# SQL injection
+
+## SQL
+### Описание
+
+* Език за разговори с бази данни
+* SELECT user, password FORM users WHERE username='admin'
+* Почти истински език за програмиране
+
+### Употреба
+
+* Почти всички бази данни
+    * MySQL
+    * PostgreSQL
+    * Oracle
+    * Microsoft SQL server
+    * ...
+* От повечето езици за програмиране
+
+## Атаки
+
+### Пример
+
+~~~
+# Никога не пишете такъв код
+$user = $_GET['user'];
+$pass = $_GET['pass'];
+
+$res = mysql_query("SELECT count(*) FROM users "\
+       "WHERE username='".$user"' AND pass='".$pass."';");
+~~~
+
+### нормално изпълнение
+~~~
+$user="admin";
+$pass="tmp";
+"SELECT count(*) FROM users "\
+       "WHERE username='admin' AND pass='tmp';
+~~~
+
+### по-весело изпълнение
+~~~
+$user="admin";
+$pass="' OR ''='";
+"SELECT count(*) FROM users "\
+       "WHERE username='admin' AND pass='' OR ''='';
+~~~
+
+### и леко тъжно такова
+~~~
+$user="admin";
+$pass="'; DROP table users; --";
+"SELECT count(*) FROM users "\
+       "WHERE username='admin' AND pass='tmp'; DROP table users;--'
+~~~
+
+### little Bobby tables
+![exploits_of_a_mom](exploits_of_a_mom.png)
