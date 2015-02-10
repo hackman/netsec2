@@ -51,7 +51,7 @@ General problems in script languages
 - Hash implementation(collisions) (ManiaX)
 - SQL (ManiaX)
 - Code (Marian)
-- Weektyping
+- Weaktyping
 - PHP (Marian)
   - SQL
   - Code
