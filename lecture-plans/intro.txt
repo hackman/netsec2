@@ -1,5 +1,8 @@
 - Intro
-- Programming languages (interpretative and compiled)
+- Programming languages
+  - compiled
+  - interpretative
+  - just-in-time compilation
 - Types of attacks
   - overflow
 	- stack
@@ -23,3 +26,45 @@
 	- Crypto
 - Denial of servic
 - Input validation
+
+- Intro
+  - Why we decided to make this course
+  - Present all speakers
+    - Vasil
+    - Petko
+    - Joan
+    - Bobi
+    - Marian
+  - Adminitrative things 
+    - Site
+    - Mailing list
+    - Recordings
+    - Exam
+    - Course work
+
+- Programming languages
+  - What is machine code?
+  - What is a compiled language?
+  - What is a interpretative language?
+    - Why are they slower... simply because "if ($a == 0)" can be translated to:
+    1. get the addres of an elemet of this($a) data structure
+    2. convert this element to integer(because most probably it is not and int)
+    3. convert 0 to integer
+    4. add the converted variables as parameters to the cmopare() function
+    5. the compare() function executes the cmp CPU instruction
+  - What is just-in-time compilation?
+
+Go trough the course schedule
+- Tupes of attacks
+  - memory
+	- stack vs. heap
+	- overflows
+		- integer - car km meter overflow. 
+		- stack
+		- heap
+
+
+Useful links:
+	Wikipedia(for each subject that was discussed)
+	http://gribblelab.org/CBootcamp/7_Memory_Stack_vs_Heap.html
+
