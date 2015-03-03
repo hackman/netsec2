@@ -6,3 +6,4 @@ Books that are related to the things we discuss in this course:
   Security Warrior
   Secure Programming Cookbook for C and C++
   The CERT C Codding Standard
+  Reverse engineering for beginners (http://beginners.re)
