@@ -15,3 +15,23 @@
   - type conversion
   - sign extension
 - Uninitialized data
+
+
+Useful links:
+  http://www.win.tue.nl/~aeb/linux/hh
+  http://www.phrack.org/issues/49/14.html#article
+  http://www.cs.berkeley.edu/~daw/teaching/cs261-f07/reading/beyondsmashing.pdf
+  http://en.wikipedia.org/wiki/NX_bit
+  http://www.sans.edu/student-files/presentations/heap_overflows_notes.pdf
+  http://www.mathyvanhoef.com/2013/02/understanding-heap-exploiting-heap.html
+  http://people.cs.umass.edu/~emery/pubs/06-28.pdf  (HeapShield)
+  https://lirias.kuleuven.be/bitstream/123456789/430509/1/heapsentry_dimva2013.pdf
+  http://www.blackhat.com/presentations/bh-usa-04/bh-us-04-silberman/bh-us-04-silberman-paper.pdf
+  http://phrack.org/issues/66/15.html Linux Kernel Heap Tampering Detection
+  http://www.fort-knox.org/files/younan_malloc.pdf
+  http://web.archive.org/web/20121010025025/http://www.cs.cmu.edu/~dbrumley/pubs/integer-ndss-07.pdf RICH
+  https://www.owasp.org/index.php?title=Integer_overflow&setlang=en
+  http://www.fefe.de/intof.html Integer overflows
+  http://www.exploit-db.com/wp-content/themes/exploit/docs/28478.pdf Off-by-one
+  http://www.hpenterprisesecurity.com/vulncat/en/vulncat/cpp/buffer_overflow_off_by_one.html
+
