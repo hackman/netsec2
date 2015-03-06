@@ -34,4 +34,6 @@ Useful links:
   http://www.fefe.de/intof.html Integer overflows
   http://www.exploit-db.com/wp-content/themes/exploit/docs/28478.pdf Off-by-one
   http://www.hpenterprisesecurity.com/vulncat/en/vulncat/cpp/buffer_overflow_off_by_one.html
+  https://cseweb.ucsd.edu/~hovav/dist/rop.pdf Return oriented programming
+  https://www.blackhat.com/presentations/bh-usa-08/Shacham/BH_US_08_Shacham_Return_Oriented_Programming.pdf
 
