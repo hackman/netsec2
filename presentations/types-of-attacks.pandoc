@@ -203,6 +203,15 @@ for (i = 0; i OP 5; i++)  {
 ------------------------------------------
 ~~~~
 
+# Return into library
+
+- What you don't have executable stack memory?
+
+# Return into library
+
+- What you don't have executable stack memory?
+	+ You still have the libraries the application has loaded..
+	+ Think about unlink() or printf()
 
 # Input validation
 ## Environment
@@ -229,6 +238,23 @@ for (i = 0; i OP 5; i++)  {
 - Keep in mind charsets
 
 # Race conditions
+
+~~~~
+if (access("file", W_OK) != 0) {
+   exit(1);
+}
+ 
+fd = open("file", O_WRONLY);
+write(fd, buffer, sizeof(buffer))
+~~~~
+
+## time of check to time of use
+
+# Race conditions
+- non re-entrent functions (DB, Shared mem, files)
+- mutex/futex/spinlock/RCU/fcntl
+- acter model (no shared resources architecture)
+
 # Timing
 
 
