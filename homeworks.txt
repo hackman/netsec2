@@ -1,0 +1,13 @@
+Homeworks for this course are ongoing...
+You can submit PoC(Proof-of-Concept) exploits as soon as you have them.
+
+The task is simple, find security issues within the following software:
+- Moodle
+- Joomla
+- WordPress
+- FFmpeg/AVconv (they are pretty close)
+- Linux Kernel
+
+Every proven security issue is elidgable for 1 to 3 points.
+
+If you have worked on any other opensource software and have reported a software security issue to them or want to work on auditing that code, please first consult with the teachers of the course.
