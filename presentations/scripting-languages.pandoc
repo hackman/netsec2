@@ -1,0 +1,39 @@
+% Scripting Languages
+% Network Security II - secure coding
+% Marian Marinov \<mm@yuhu.biz\>
+
+# General Issues of the scripting languages
+
+## DoS caused by the way they are executed
+
+* Common Gateway Interface RFC 3875 - CGI/1.1
+	+ timeouts between the CGI and the server
+	+ security issues based on the way the CGI is executed
+		- directly
+		- suexec
+		- chrooted
+		- daemon(fcgi/fpm/PSGI/WSGI...)
+	+ Resource limits (ulimits)
+* Crash the web server when running as module in it
+* Eat all the memory of the server in FCGI, FPM and similar setups
+
+# Interpreter problems
+
+## Bad implementations
+
+## Memory leaks
+
+* Causing DoS
+* Causing information disclosure
+
+## Faulty implementation of system functions
+
+## Bad handling of environment variables (bad environment sanitation)
+
+## Bad language designs 
+* Register_globals in PHP
+* +/=== in JavaScript
+* variable context in Perl
+* case/switch with fall-trough
+
+# Awkward and rarely understood language specifics
