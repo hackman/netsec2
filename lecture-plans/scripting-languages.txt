@@ -1,0 +1,9 @@
+General Issues of the scripting languages
+- DoS caused by the way they are executed
+- Interpreter problems
+  - bad implementations 
+  - memory leaks, causing DoS
+  - faulty implementation of system functions
+  - bad handling of environment variables (bad environment sanitation)
+  - bad designs (register_globals)
+- Awkward and rarely understood language specifics
