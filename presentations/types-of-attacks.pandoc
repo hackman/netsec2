@@ -1,0 +1,261 @@
+% Types of attacks
+% Network Security II - secure coding
+% Marian Marinov
+
+# Buffer overflow
+- Stack overflow
+- Heap overflow
+- Arithmetic overflow
+- Off-by-one overflow
+
+# Stack overflow
+
+- What is a stack?
+
+~~~~
+Unallocated space
+-----------------------
+c[0]
+      char c[12]
+                 c[11]
+-----------------------
+      char *bar
+-----------------------
+ Saved frame pointer
+-----------------------
+    Return Address
+-----------------------
+Parent routine's stack
+~~~~
+
+# Stack overflow
+
+- How does it normally work?
+
+~~~~
+Unallocated space
+-----------------------
+ h | e | l | l | o | \n
+      char c[12]
+
+-----------------------
+      char *bar
+-----------------------
+ Saved frame pointer
+-----------------------
+    Return Address
+-----------------------
+Parent routine's stack
+~~~~
+
+# Stack overflow
+
+- What does the attacker do?
+
+~~~~
+Unallocated space
+-----------------------
+xA | A | A | A | A | A   x=0x80C03508
+ A | A | A | A | A | A
+ A | A | A | A | A | A
+-----------------------
+ A | A | A | A | A | A
+-----------------------
+ A | A | A | A | A | A
+-----------------------
+    Return Address
+-----------------------
+Parent routine's stack
+~~~~
+
+# Stack overflow
+
+- The actual exploit...
+
+~~~~
+Unallocated space
+-----------------------    
+xA | A | A | A | A | A   x=0x80C03508
+ A | A | A | A | A | A
+ A | A | A | A | A | A
+-----------------------
+ A | A | A | A | A | A
+-----------------------
+ A | A | A | A | A | A
+-----------------------
+ \x08 \x35 \xC0 \x80
+-----------------------
+Parent routine's stack
+~~~~
+
+
+# Stack overflow
+
+- Stack buffer overflow/overrun
+- Deep recursion causing DoS
+
+## Protection?
+- Address space layout randomization
+- Non-executable stack(requires the NX bit from the CPU)
+- PaX (NX emulation and much more)
+- Trampolines/StackGuard (gcc)
+- StackShield (global return stack table) (gcc)
+- Stack Smashing Protection (gcc)
+	+ -fstack-protector/-fstack-protector-all
+    + -D_FORTIFY_SOURCE=2
+	+ objdump -d file | grep __stack_chk_fail 
+
+# Heap overflow
+- What is heap?
+
+# Heap overflow
+- What is heap?
+	+ the dynamically allocated memory given to an application
+
+# Heap overflow
+~~~~
+---------------
+ size + status
+---------------   allocated chunk
+  ...user...
+---------------				struct chunk {
+								int prev_size;
+---------------					int size;
+ size + status					struct chunk *fd;
+---------------					struct chunk *bk;
+  forward ptr				};
+---------------
+ backward ptr    free chunk
+---------------
+  ...free...
+---------------
+     size
+~~~~
+
+# Heap overflow
+
+## Protections
+- HeapShield
+- HeapSentry
+- -D_FORTIFY_SOURCE=2
+- use mprotect() to make your memory READONLY
+- Linux Kernel Heap Tampering Detection (only for kernel space)
+- Younan malloc
+
+# Arithmetic overflow
+
+- Integer
+- Sign
+- Float
+
+# Arithmetic overflow
+- Integer overflow
+	+ 32bit signed integer range: -2,147,483,648 to 2,147,483,647
+	+ 32bit unsigned integer range: 0 to 4,294,967,295 
+
+~~~~~
+signed int m, a, n = 12;
+// a is controlled by an attacker
+m = n + a;
+
+~~~~~
+## if a is > 2,147,483,635
+- What will be the value of m?
+- What if the integers are unsigned?
+
+##
+ The situation is similar with floats 
+
+##
+ Underflow
+
+# Arithmetic overflows
+
+## Protections
+- Check the size of your values (INT30-C)
+- RICH
+
+# off-by-one overflows
+
+~~~~
+
+int arr[4];
+for (i = 0; i OP 5; i++)  {
+    /* Body of the loop */
+}
+~~~~
+
+- What if OP is: <
+- What if OP is: <=
+
+
+# off-by-one overflows
+* Fencepost error
+
+##
+ If you build a straight fence 30 meters long with posts spaced 3 meters apart, how many posts do you need?
+
+##
+
+~~~~
+------------------------------------------
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+------------------------------------------
+~~~~
+
+# Return into library
+
+- What you don't have executable stack memory?
+
+# Return into library
+
+- What you don't have executable stack memory?
+	+ You still have the libraries the application has loaded..
+	+ Think about unlink() or printf()
+
+# Input validation
+## Environment
+## Direct input
+
+# Environment
+- What is this thing... environment?
+- Switch/case based on ENV variable
+	+ (change the control flow of the application)
+- Buffer overflow using ENV variable
+	+ (take control over the application or simply crash it)
+- Shellshock CVE-2014-6277
+- LD_LIBRARY_PATH & LD_PRELOAD
+
+
+# Direct Input
+- Never trust user input
+- User input is
+  + data recieved from a USER(which may also be API)
+  + data received from files
+  + data received from the network
+- Do not use blacklists... use whitelists instead
+- Check the type of the data
+- Keep in mind charsets
+
+# Race conditions
+
+~~~~
+if (access("file", W_OK) != 0) {
+   exit(1);
+}
+ 
+fd = open("file", O_WRONLY);
+write(fd, buffer, sizeof(buffer))
+~~~~
+
+## time of check to time of use
+
+# Race conditions
+- non re-entrent functions (DB, Shared mem, files)
+- mutex/futex/spinlock/RCU/fcntl
+- acter model (no shared resources architecture)
+
+# Timing
+
+
+
