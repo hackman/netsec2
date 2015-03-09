@@ -1,6 +1,6 @@
 % Scripting Languages
 % Network Security II - secure coding
-% Marian Marinov \<mm@yuhu.biz\>
+% Marian HackMan Marinov \<mm@yuhu.biz\>
 
 # General Issues of the scripting languages
 
@@ -20,6 +20,13 @@
 # Interpreter problems
 
 ## Bad implementations
+* CVE-2005-0088 - Python information disclosure
+* Call to the PHP interpreter without any parameters makes it hang :)
+
+## Bad configuration
+* CVE-1999-0509 - Perl, sh, csh and etc. were placed in publicly accessiable folder
+* PHP-CGI setup initially used Apache actions, which allowed direct access to the interpreter
+* Enabling verbose debug messages on errors
 
 ## Memory leaks
 
@@ -27,13 +34,32 @@
 * Causing information disclosure
 
 ## Faulty implementation of system functions
+- Parsing images with PHP code in them can result in the PHP code being executed
+- Parsing images with Python's PIL library can allow arbitrary code execution
+- Python's tempfile.mktemp() is vulnerable to Race condition
 
 ## Bad handling of environment variables (bad environment sanitation)
+* All - PATH
+* Perl - PERLLIB & PERL5OPT
+* Python -  PYTHONHOME & PYTHONPATH
+* Ruby - DLN_LIBRARY_PATH, RUBYLIB, RUBYLIB_PREFIX, RUBYOPT, RUBYPATH & RUBYSHELL
+* Storing sensitive data in ENV variables is plain **STUPID**
+	+ the argument that /proc/XXX/environ is -r--------, is **INVALID**
+	+ multiple processes for the same user can access the env data
 
 ## Bad language designs 
 * Register_globals in PHP
-* +/=== in JavaScript
+	+ responsible for **MILLIONS** of compromised sites
+* Ruby's mass-assignment vulnerability
+	+ in 2012 Egor Homakov **OWNED** GitHub because of this
+* + in JavaScript
+* ===/!== in JavaScript and PHP
+* = vs == in C/C++ 
 * variable context in Perl
 * case/switch with fall-trough
 
 # Awkward and rarely understood language specifics
+* var = (condition) ? TRUE : FALSE;
+* Perl - 3 parameter open()
+* PHP GPC order
+* SSL (disabling verification)
