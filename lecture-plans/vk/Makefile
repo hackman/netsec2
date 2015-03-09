@@ -1,6 +1,4 @@
 
-NAMES=crypto
-
 TARGETS=$(patsubst %.pandoc,%.pdf,$(wildcard *.pandoc)) $(patsubst %.pandoc,%-blog.txt,$(wildcard *.pandoc))
 
 IMGS=
