@@ -64,3 +64,27 @@
   - Code
   - Hash implementation(collisions)
   - general language issues
+
+Arrays vs. Hashes in PHP
+
+
+PHP Ini handling:
+
+search for php-%sapi-module-name%.ini in CWD
+search for php-%sapi-module-name%.ini in install/bin
+search for php-%sapi-module-name%.ini in install/lib
+search for php.ini file in CWD
+search for php.ini file in install/bin
+search for php.ini file in install/lib
+ini scan dir
+per-dir configuration (walk trough all dirs and search for php.ini)
+per-host configuration (papers.yuhu.biz.ini)
+user configuration
+
+Adds CWD to the search path, for the CGI but not for the CLI.
+
+Useful links:
+
+http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/
+https://www.owasp.org/index.php/Direct_Dynamic_Code_Evaluation_%28%27Eval_Injection%27%29
+https://www.owasp.org/index.php/Path_Traversal
