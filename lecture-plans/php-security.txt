@@ -1,3 +1,64 @@
+- Configuration
+  - build issues
+  - configuration handling
+    - php.ini
+    - scan dir
+    - local .ini files
+    - ini_set/ini_alter/ini_restore
+    - Apache related
+		php_value name value 
+		php_flag name on|off 
+		php_admin_value name value 
+		php_admin_flag name on|off
+		
+  - configuration options
+    Modules
+    	enable_dl
+		extension_dir
+    Error handling
+		error_append_string
+		error_prepend_string
+		error_reporting
+    	expose_php
+    	track_errors
+    	log_errors (but log_errors_max_len)
+	File handling
+	    allow_url_fopen
+	    allow_url_include
+	    auto_append_file
+    	auto_prepend_file
+		doc_root
+    	user_dir
+    	user_ini.filename
+    	open_basedir
+		include_path	(pear modules)
+		upload_tmp_dir
+	Limits
+    	max_execution_time
+    	memory_limit
+    	post_max_size
+		upload_max_filesize
+		max_file_uploads
+    General
+    	always_populate_raw_post_data
+    	variables_order
+    	register_globals
+    	safe_mode
+    	safe_mode_exec_dir
+    	safe_mode_include_dir
+    	safe_mode_allowed_env_vars
+    	safe_mode_protected_env_vars
+    	sql.safe_mode
+	Sessions
+    	session.save_handler
+    	session.save_path
+    	session.serialize_handler
+- Syntax issues
+- Code injection
+- Code evaluation
+- SQL injection
+		- 
+- Hash collisions
   - SQL
   - Shell
   - Code

