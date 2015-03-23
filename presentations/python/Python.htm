@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Python</title>
+    <meta charset="utf-8">
+    <script src="Python_files/slides.js"></script>
+  <meta content="width=1100,height=750" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"></head>
+
+  <body class="loaded" style="display: none">
+
+    <section class="slides layout-widescreen">
+      
+      <article>
+        <h1>Python</h1>
+        <h3>17.03.2015</h3>
+        
+        
+          <div class="presenter">
+            
+  
+  <p>
+    Кирил Владимиров
+  </p>
+  
+
+          </div>
+        
+          <div class="presenter">
+            
+          </div>
+        
+          <div class="presenter">
+            
+  
+  <p>
+    
+  </p>
+  
+
+          </div>
+        
+      </article>
+      
+  
+  
+      <article>
+      
+        <h3>Python 101</h3>
+        
+  <ul>
+  
+    <li>general-purpose</li>
+  
+    <li>high-level</li>
+  
+    <li>object-oriented</li>
+  
+    <li>a bit functional</li>
+  
+    <li>...</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Къде отива кодът?</h3>
+        
+  <ul>
+  
+    <li>Код се пише в <code>.py</code> файлове (например gameoflife.py).</li>
+  
+    <li>Изпълнява се с <code>python gameoflife.py</code></li>
+  
+    <li>Можем да пишем код интерактивно, като пуснем python без аргументи.</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Python е предсказуем</h3>
+        
+  
+  <p>
+    Когато не сте сигурни, просто пробвайте.
+  </p>
+  
+
+  
+  <div class="code"><pre>$ python
+&gt;&gt;&gt; 5 + 10
+15
+&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; b = a + 10
+&gt;&gt;&gt; print(b)
+15
+&gt;&gt;&gt; a * 2
+10
+&gt;&gt;&gt; a ** 2
+25
+&gt;&gt;&gt; "hello" + ', ' + "world"
+"hello, world"</pre></div>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Един ред код</h3>
+        
+  
+  <div class="code"><pre>my_var = 'spam'.upper()
+print(my_var) # SPAM</pre></div>
+  
+
+  <ul>
+  
+    <li>Съдържа един израз, никога не завършва с ;</li>
+  
+    <li>Всичко след # е коментар</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Имена</h3>
+        
+  
+  <p>
+    Можем да дадем име на стойност и получаваме променлива:
+  </p>
+  
+
+  
+  <div class="code"><pre>velocity = distance / 60</pre></div>
+  
+
+  
+  <p>
+    Динамичен език - стойностите имат тип, но имената - не.
+  </p>
+  
+
+  
+  <div class="code"><pre>а = 5
+type(a) # &lt;class 'int'&gt;
+a = 'test'
+type(a) # &lt;class 'str'&gt;</pre></div>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Имена</h3>
+        
+<div class="image">
+  <img src="Python_files/name_assignment_1.png">
+</div>
+
+<div class="image">
+  <img src="Python_files/name_assignment_2.png">
+</div>
+
+<div class="image">
+  <img src="Python_files/name_assignment_3.png">
+</div>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Duck-typing</h3>
+        <figcaption>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck</figcaption>
+  
+  <div class="code"><pre>class Duck:
+    def quack(self):
+        print("Quack, quack!")
+
+    def fly(self):
+        print("Flap, Flap!")
+
+class Person:
+    def quack(self):
+        print("I'm Quackin'!")
+
+    def fly(self):
+        print("I'm Flyin'!")
+
+def in_the_forest(mallard):
+    mallard.quack()
+    mallard.fly()
+
+in_the_forest(Duck())
+in_the_forest(Person())</pre></div>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Всичко е обект</h3>
+        
+  
+  <p>
+    Буквално
+  </p>
+  
+
+  
+  <div class="code"><pre>&gt;&gt;&gt; type(42)
+&lt;class 'int'&gt;
+&gt;&gt;&gt; type([])
+&lt;class 'list'&gt;
+&gt;&gt;&gt; type([]) is list
+True
+&gt;&gt;&gt; type(list)
+&lt;class 'type'&gt;
+&gt;&gt;&gt; type(list) is type
+True
+&gt;&gt;&gt; type(type(type(list)))
+&lt;class 'type'&gt;</pre></div>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Класове</h3>
+        
+  
+  <div class="code"><pre>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+v = Vector(1.0, 1.0)</pre></div>
+  
+
+  <ul>
+  
+    <li>Атрибутите не се нуждаят от декларации</li>
+  
+    <li>Винаги са достъпни</li>
+  
+    <li>Могат да се променят</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>private/protected</h3>
+        
+  <ul>
+  
+    <li>private и protected концепциите не са това, за което сте свикнали да мислите в езици като C++/Java/C#</li>
+  
+    <li>Ограниченията за използване на защитени и частни методи в класовете в python е отговорност на програмиста</li>
+  
+    <li>Атрибути започващи с _ са защитени, т.е. би следвало да се ползват само от методи на класа и наследяващи го класове</li>
+  
+    <li>Атрибути започващи с <i></i> са частни, т.е. би следвало да се ползват само от методи на класа</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>"би следвало"</h3>
+        
+  
+  <p>
+    Нищо не ви пречи да ги достъпвате
+  </p>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Константи</h3>
+        
+  <ul>
+  
+    <li>Имената им са в <code>SCREAMING_SNAKE_CASE</code></li>
+  
+    <li>Също чисто конвенционални</li>
+  
+    <li>Можете да ги промените и нищо няма да ви спре</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Методи</h3>
+        
+  
+  <p>
+    Те са си атрибути като всички други
+  </p>
+  
+
+  <ul>
+  
+    <li>Могат да се достъпват</li>
+  
+    <li>Могат да се променят</li>
+  
+    <li>Могат и да се добавят нови, по време на изпълнение</li>
+  
+  </ul>
+
+  
+  <div class="code"><pre>v = Vector(1.0, 1.0)
+Vector.inject = lambda _: print("EVIL!!!!")
+v.inject()</pre></div>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Достъп до всичко</h3>
+        
+  <ul>
+  
+    <li>Всеки обект си има <code>__dict__</code> със всички атрибути</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Можем да се предпазим от това</h3>
+        
+  
+  <p>
+    <code>__slots__</code>
+  </p>
+  
+
+  
+  <div class="code"><pre>class Vector:
+    __slots__ = 'x', 'y'
+
+v = Vector()
+v.x = 1
+v.y = 2
+v.z = 3
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-20-8460e7b49cf0&gt; in &lt;module&gt;()
+----&gt; 1 v.z = 3
+
+AttributeError: 'Vector' object has no attribute 'z'</pre></div>
+  
+
+  <ul>
+  
+    <li>По-компактни обекти</li>
+  
+    <li>Контрол над атрибутите</li>
+  
+    <li>Идеални, ако правите <b>много</b> от тях</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Достъпване от потребителски вход</h3>
+        
+  
+  <p>
+    Можем и да правим и така:
+  </p>
+  
+
+  
+  <div class="code"><pre>getattr(v, some_str_from_the_stdin)</pre></div>
+  
+
+  
+  <p>
+    Внимавайте с това
+  </p>
+  
+
+      
+      </article>
+  
+  
+  
+      <article>
+      
+        <h3>Магически методи</h3>
+        
+  <ul>
+  
+    <li> __add__(self, other) за self + other</li>
+  
+    <li> __sub__(self, other) за self - other</li>
+  
+    <li> __mul__(self, other) за self * other</li>
+  
+    <li> __truediv__(self, other) за self / other</li>
+  
+    <li> __floordiv__(self, other) за self // other</li>
+  
+    <li> __mod__(self, other) за self % other</li>
+  
+    <li> __lshift__(self, other) за self &lt;&lt; other</li>
+  
+    <li> __rshift__(self, other) за self &gt;&gt; other</li>
+  
+    <li> __and__(self, other) за self &amp; other</li>
+  
+    <li> __xor__(self, other) за self ^ other</li>
+  
+    <li> __or__(self, other) за self | other</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article class="far-past">
+      
+        <h3>GC</h3>
+        
+  <ul>
+  
+    <li>reference counting</li>
+  
+    <li>Може да се справя с циклите... почти винаги</li>
+  
+    <li>Можете да дефинирате _finalizer_-и на вашите обекти с <code>__del__</code></li>
+  
+    <li>Ако обекти с дефинирани _finalizer_-и зациклят, интерпретаторът вдига ръце</li>
+  
+    <li>Можете да си ги чистите сами... ако се сетите</li>
+  
+    <li>Което едва ли ще стане, преди това да е проблем</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article class="past">
+      
+        <h3>Concurrency</h3>
+        
+  
+  <p>
+    И в Python има GIL
+  </p>
+  
+
+  <ul>
+  
+    <li>Подходящ за I/O bound проблеми</li>
+  
+    <li>Крайно неподходящ за CPU bound такива</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article class="current">
+      
+        <h3>Parallelism</h3>
+        
+  
+  <p>
+    Само с нови процеси
+  </p>
+  
+
+  <ul>
+  
+    <li>multiprocessing</li>
+  
+    <li>subproccess</li>
+  
+  </ul>
+
+      
+      </article>
+  
+  
+  
+      <article class="next">
+      
+        <h3>subproccess.call</h3>
+        
+  
+  <p>
+    В никакъв случай не му подавайте <code>shell=True</code>, ако има потребителски вход
+  </p>
+  
+
+  
+  <div class="code"><pre>&gt;&gt;&gt; from subprocess import call
+&gt;&gt;&gt; filename = input("What file would you like to display?\n")
+What file would you like to display?
+non_existent; rm -rf / #
+&gt;&gt;&gt; call("cat " + filename, shell=True) # Uh-oh. This will end badly...</pre></div>
+  
+
+      
+      </article>
+  
+  
+
+      <article class="far-next">
+        <h3>Thank you</h3>
+        
+          <div class="presenter">
+            
+  
+  <p>
+    Кирил Владимиров
+  </p>
+  
+
+          </div>
+        
+          <div class="presenter">
+            <p class="link"><a href="mailto:kiril@vladimiroff.org" target="_blank">kiril@vladimiroff.org</a></p><p class="link"><a href="http://twitter.com/K_Vladimiroff" target="_blank">@K_Vladimiroff</a></p>
+  
+  <p>
+    github.com/Vladimiroff
+  </p>
+  
+
+          </div>
+        
+          <div class="presenter">
+            
+  
+  <p>
+    
+  </p>
+  
+
+          </div>
+        
+      </article>
+
+    <div id="prev-slide-area" class="slide-area"></div><div id="next-slide-area" class="slide-area"></div></section>
+
+    <div style="display: none;" id="help">
+      Use the left and right arrow keys or click the left and right
+      edges of the page to navigate between slides.<br>
+      (Press 'H' or navigate to hide this message.)
+    </div>
+
+  
+  
+  <script src="Python_files/play.js"></script>
+  
+
+<link href="Python_files/css.css" type="text/css" rel="stylesheet"><link href="Python_files/styles.css" type="text/css" rel="stylesheet"></body></html>
