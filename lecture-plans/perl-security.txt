@@ -3,3 +3,71 @@
   - Code
   - Hash implementation(collisions)
   - general language issues
+
+Environment:
+	INC
+	PERLLIB
+	PERL5LIB
+	-l (cmd line argument to add more dirs to @INC
+
+
+Execution: 
+	perl interpreter -> script file
+
+
+exec() vs `` vs  system()
+
+	$username = param ("username");
+	system("cat /home/pesho/$username");
+
+	What if username='; cat /etc/passwd' ?
+
+	system("cat /home/pesho/; cat /etc/passwd");
+
+	And what if username='; rm -rf /' ?
+	system("cat /home/pesho/; rm -rf /");
+
+	
+	system("cat", "/home/pesho/$username");
+
+Error code handling:
+	http://perldoc.perl.org/perlvar.html#Error-Variables
+
+
+Race conditions
+  unless (-e "/tmp/a_temporary_file") {
+       open (FH, ">/tmp/a_temporary_file");
+  }
+
+Open files:
+	Insecure:
+	open(my $fd, "<$user_data");
+
+	A lot more secure :)
+	open(my $fd, ">", "$user_data");
+
+	File open modes:
+	>	- writing
+	>>	- overwriting (truncate the file and place the cursor at the begining)
+	<	- reading
+	+<	- read and write
+	>+	- read and write
+	-|	- start a command and read everything FROM its output
+	|-	- start a command and send everything TO its input
+
+	Special case:
+		open(my $tmp, "+>", undef)
+	opens a temporary filename
+
+Tainted Mode
+	-t tainting warnings
+	-T tainting checks(warnings + generate error)
+
+Regular Expressions issues:
+	http://perldoc.perl.org/perlretut.html#A-bit-of-magic:-executing-Perl-code-in-a-regular-expression
+
+
+Useful links:
+  http://perldoc.perl.org/perlsec.html
+  http://www.cgisecurity.com/lib/sips.html
+  
