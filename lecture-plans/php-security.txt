@@ -88,3 +88,9 @@ Useful links:
 http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/
 https://www.owasp.org/index.php/Direct_Dynamic_Code_Evaluation_%28%27Eval_Injection%27%29
 https://www.owasp.org/index.php/Path_Traversal
+
+
+preg_replace("/($username):$password(:.*)/e", 
+      "'\\1:'.strtolower('  $newpassword')  .'\\2'", 
+      "'\\1:'.strtolower(''.system('ls -l').'').'\\2'", 
+$users );
