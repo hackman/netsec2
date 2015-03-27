@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="bg">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Ruby – особености от гледна точка на сигурността</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/tomorrow.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+     var link = document.createElement( 'link' );
+     link.rel = 'stylesheet';
+     link.type = 'text/css';
+     link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+     document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section>
+	  <h1>Ruby</h1>
+	  <h3>Особености от гледна точка на сигурността</h3>
+	</section>
+
+	<section>
+	  <h2>Набързо за Ruby</h2>
+          <p>
+	    <span class="fragment">Динамичен</span><span class="fragment">, oбектно-ориентиран</span><span class="fragment">, general-purpose</span><span class="fragment">, но предимно използван за Web, език за програмиране</span>
+	  </p>
+	</section>
+
+        <section>
+          <h2>Всичко е обект</h2>
+          <pre class="fragment"><code class="language-ruby">
+123.class
+#=> Fixnum
+          </code></pre>
+          <pre class="fragment"><code class="language-ruby">
+"Ruby".class
+#=> String
+          </code></pre>
+          <pre class="fragment"><code class="language-ruby">
+nil.class
+#=> NilClass
+          </code></pre>
+          <pre class="fragment"><code class="language-ruby">
+true.class
+#=> TrueClass
+          </code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h2>Променливи</h2>
+            <ul>
+              <li class="fragment">глобални: <pre><code class="language-ruby">$FOO = "bar"</code></pre></li>
+              <li class="fragment">на инстанцията: <pre><code class="language-ruby">@foo = "bar"</code></pre></li>
+              <li class="fragment">на класа: <pre><code class="language-ruby">@@foo = "bar"</code></pre></li>
+              <li class="fragment">локални: <pre><code class="language-ruby">foo = "bar"</code></pre></li>
+            </ul>
+          </section>
+
+          <section>
+            <p>Когато решите да дефинирате глобална променлива в Ruby, станете от компютъра, изпийте една студена вода и се разходете.</p>
+            <p class="fragment">Ако когато се върнете, все още имате желание да дефинирате глобална променлива, прочетете (отново) тази статия:</p>
+            <p class="fragment">http://c2.com/cgi/wiki?GlobalVariablesAreBad</p>
+          </section>
+        </section>
+
+        <section>
+          <h2>Низове</h2>
+          <p class="fragment">Литералите за низ в Ruby са единични и двойни кавички</p>
+          <pre class="fragment"><code class="language-ruby">'Васил „не“ пие' # <--- Низ :)</code></pre>
+          <p class="fragment">UTF-8 кодирани, но част от операциите върху тях действат само върху ASCII символите им:</p>
+          <pre class="fragment"><code class="language-ruby">"Васил „не“ pie".upcase
+#=> "Васил „не“ PIE"</code></pre>
+        </section>
+
+        <section>
+          <p>Създаването на низ с двойни кавички предоставя интерполация</p>
+          <pre class="fragment"><code class="language-ruby">"1 + 2 = #{1 + 2}"
+#=> "1 + 2 = 3"</code></pre>
+        </section>
+
+        <section>
+          <h2>Символи</h2>
+          <p class="fragment">Интернирани низове от символи</p>
+          <p class="fragment">Интернирани?</p>
+          <p><span class="fragment">Immutable</span><span class="fragment">, всяка уникална стойност остава в паметта до приключване на изпълнението</span><span class="fragment">. Използват се например за ключове за хешове</span><span class="fragment"> и за други работи :).</span></p>
+          <pre class="fragment"><code>animal = :crocodile
+animals[animal] = Vasil.new
+animals[:crocodile]
+#=> #&lt;Vasil:0x007fb7f049d180&gt;
+
+:crocodile.object_id
+#=> 1390428
+
+animal.object_id
+#=> 1390428</code></pre>
+        </section>
+
+        <section>
+          <h2>Класове и методи</h2>
+          <p class="fragment">Клас се дефинира така:</p>
+          <pre class="fragment"><code class="language-ruby">class Vasil
+end</code></pre>
+
+          <p class="fragment">Метод се дефинира така:</p>
+          <pre class="fragment"><code class="language-ruby">class Vasil
+  def doesnt_drink?
+    false
+  end
+end</code></pre>
+
+        </section>
+
+        <section>
+          <h1>Опасните неща</h1>
+        </section>
+
+        <section>
+          <h2>Препълване на паметта</h2>
+          <p class="fragment">Преди Ruby 2.2.0 всички символи остават в паметта до приключване на изпълнението на програмата.</p>
+          <p class="fragment">Това означава, че ако уникални символи се създават от потребителски данни, приложението може да препълни паметта на машината, на която работи.</p>
+          <p class="fragment">След 2.2.0 динамично създадените символи се освобождават от garbage collection процеса.</p>
+        </section>
+
+        <section>
+          <p>В Ruby (почти) всичко може да бъде променено по време на изпълнение</p>
+          <p class="fragment">Под почти всичко да се разбира, че дори константите могат да бъдат променяни</p>
+          <pre class="fragment"><code class="language-ruby">VASIL_DOESNT_DRINK = false
+VASIL_DOESNT_DRINK = "true"
+# warning: already initialized constant VASIL_DOESNT_DRINK
+# warning: previous definition of VASIL_DOESNT_DRINK was here
+VASIL_DOESNT_DRINK
+=> "true"</code></pre>
+        </section>
+
+        <section>
+          <h2>Изводи</h2>
+          <p class="fragment">Програмистите трябва да внимават да не променят неочаквано нещо...<span class="fragment"> Което не е толкова трудно, ако програмистите спазват конвенциите.</span></p>
+        </section>
+
+        <section>
+          <h2>Метапрограмиране</h2>
+          <ul class="fragment">
+            <li><code>eval</code></li>
+            <li><code>instance_eval</code></li>
+            <li><code>class_eval</code></li>
+            <li><code>module_eval</code></li>
+          </ul>
+          <p class="fragment">До тези методи никога не трябва да достигат данни под контрола на потребителите.</p>
+        </section>
+
+        <section>
+          <h2>Динамично извикване на методи</h2>
+          <ul>
+            <li><code>Object#send</code> (извиква дори private методи)</li>
+            <li><code>Object#respond_to?</code></li>
+          </ul>
+          <p class="fragment">Отново, ако аргументите на тези методи са под контрола на потребителите, you're gonna have a bad time.</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Good old shell injection</h2>
+            <ul class="fragment">
+              <li><code>Kernel#system</code></li>
+              <li><code>Kernel#exec</code></li>
+              <li><code>Kernel#syscall</code></li>
+              <li><code>%x(foo)</code></li>
+              <li><code>`foo`</code></li>
+            </ul>
+            <p class="fragment">Параметрите на тези команди винаги трябва да бъдат екранирани, ако са под контрола на потребителите</p>
+          </section>
+          <section>
+            <p>Защо?</p>
+            <pre class="fragment"><code class="language-ruby">system("rf -rf #{params[:file]}")</code></pre>
+            <pre class="fragment"><code class="language-ruby">exec(params[:command])</pre></code>
+            <pre class="fragment"><code class="language-ruby">`unlink #{params[:something]}`</code></pre>
+            <p class="fragment">Нека преди изпълнение на горните команди, сме дефинирали тази променлива:</p>
+            <pre class="fragment"><code class="language-ruby">params = {file: '/home/vasil',
+       command: 'rm -rf /home/vasil',
+     something: '/home/vasil/Desktop/passwords.txt'}
+</code></pre>
+
+          </section>
+        </section>
+
+        <section>
+          <h2>Операции с файлове</h2>
+          <p class="fragment"><code>Dir</code>, <code>File</code>, <code>IO</code>, <code>Kernel</code>, <code>Net::FTP</code>, <code>Net::HTTP</code>, <code>PStore</code>, <code>Pathname</code>, <code>Shell</code> и т.н.</p>
+          <p class="fragment">Препоръчително е имената на файловете/директориите да не бъдат под контрола на потребителите ИЛИ да бъдат екранирани по правилния начин</p>
+          <p class="fragment">А не така:</p>
+          <pre class="fragment"><code class="language-ruby">File.read "/home/application/upload/#{params[:file]}"</code></pre>
+          <pre class="fragment"><code class="language-ruby">File.read '/home/application/upload/../../../etc/passwd'</code></pre>
+        </section>
+
+        <section>
+          <section>
+            <h2>Регулярни изрази</h2>
+            <p class="fragment">Като навсякъде другаде, с едно доста важно изключение</p>
+            <p class="fragment">За начало и край на низ не се използват <code>^</code> и <code>$</code>.</p>
+            <p class="fragment">Използват се <code>\A</code> и <code>\z</code>.</p>
+          </section>
+          <section>
+            <p>Какво става, ако се объркаме?</p>
+            <p class="fragment">Този регулярен израз:</p>
+            <pre class="fragment"><code class="language-ruby">/^https?:\/\/[^\n]+$/i</code></pre>
+            <p class="fragment">Ще разпознае този низ от символи:</p>
+            <pre class="fragment"><code>javascript:exploit_code();/*
+http://hi.com
+*/</code></pre>
+            <p class="fragment">Повече за този вид атаки по-нататък в курса.</p>
+          </section>
+        </section>
+        <section>
+          <h2>Паралелно програмиране</h2>
+          <p><span class="fragment">MRI има global interpreter lock.</span> <span class="fragment">Други имплементации на Ruby нямат.</span></p>
+          <p class="fragment">С изключение на това, особеностите на паралелното програмиране с Ruby са стандартни.</p>
+        </section>
+
+        <section>
+          <h2>Уязвимости на стандартната библиотека и runtime-а</h2>
+          <p class="fragment">MRI е написан на C</p>
+          <p class="fragment">Rubinius е написан на C++</p>
+          <p class="fragment">Съществуват редица имплементации на Ruby.</p>
+          <p class="fragment">Следете уязвимостите, асоциирани с имплементацията, която използвате.</p>
+        </section>
+
+        <section>
+          <h2>Уязвимости на използваните от програмата библиотеки</h2>
+          <p class="fragment">Всеки може да пише джемове за Ruby.</p>
+          <p class="fragment">Не всеки може да пише джемове, които нямат дупки в сигурността.</p>
+          <p class="fragment">Rubygems има функционалност за подписване на пакети, но тя масово не се ползва.</p>
+          <p class="fragment">Доскоро пакетите се трансферираха по HTTP.</p>
+        </section>
+        <section>
+          <h1>Заключение</h1>
+          <p class="fragment">Следвайте конвенциите.</p>
+          <p class="fragment">Екранирайте входящите данни.</p>
+          <p class="fragment">Следете уязвимостите на платформата си.</p>
+        </section>
+        <section data-background="crock.jpg" data-state="middle">
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+     // Full list of configuration options available at:
+     // https://github.com/hakimel/reveal.js#configuration
+     Reveal.initialize({
+       controls: false,
+       progress: true,
+       history: true,
+       center: true,
+
+       transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+       // Optional reveal.js plugins
+       dependencies: [
+         { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+         { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+         { src: 'plugin/zoom-js/zoom.js', async: true },
+         { src: 'plugin/notes/notes.js', async: true }
+       ]
+     });
+
+    </script>
+
+  </body>
+</html>
