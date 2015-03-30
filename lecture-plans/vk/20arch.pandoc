@@ -1,0 +1,460 @@
+% x86 и ARM
+% архитектури и асемблер
+% Vasil Kolev \<vasil@ludost.net\>
+
+# Основи на архитектурите
+## История
+### Описание
+
+* Преди да говорим за атаки на компилируеми езици, трябва да си изясним архитектурата отдолу
+* Ще говорим за x86 и ARM
+* Идеалната книга за целта - Reverse Engineering for Beginners
+    * http://beginners.re
+
+## x86
+### x86
+
+* Първи процесор - 8086, 1978 г.
+* 16-битов, 32-битов (80386), 64-битов (x86_64, AMD64)
+    * Да не се бърка с x64 (Itanium), който е съвсем различен
+* Little-endian
+* CISC
+* Основна архитектура на сървъри и desktop-и
+    * Мощни
+    * backwards-compatible
+    * В общи линии най-новите технологии се прилагат при тях
+* Няколко производителя - Intel, AMD
+
+
+### Основни идеи
+
+* Голям instruction set
+* Може да оперирате директно с паметта
+* Сложни инструкции
+    * могат да отнемат по няколко такта
+* Много много наследство от стари версии
+
+### Endianness
+
+![endianness](endian.png)
+
+### Регистри
+
+* General purpose - AX, BX, CX, DX (8-64bit)
+* General purpose (64bit only) - R8-R15 (8-64bit)
+* Segment registers - CS, DS, SS, ES, FS, GS (16bit)
+* Pointer registers - SP, BP (8-64bit)
+    * ползват се за стека
+* Index registers - SL, DL
+* Instruction pointer registers - IP
+* Куп други за FPU, MMX, SSE...
+
+###
+
+![x86 регистри](registers.png)
+
+### Calling conventions, stack, heap
+
+* Аргументите на функция се предават през стека
+    * Има fastcall/regparm при 32битовите с няколко регистъра
+    * x86_64 ползва 4 или 6 регистъра и след това стека
+* Стекът е виртуална конструкция в паметта
+    * RSP показва къде свършва
+    * RBP показва къде започва текущия stack frame
+* Heap-а е паметта, дадена на процеса за други нужди
+
+### stack/heap
+
+![stack and heap](stackheap-mod.png)
+
+###
+
+![stack frame](stackframe.png)
+
+### Memory protection
+
+* Ще си говорим основно за protected mode
+* ring 0, ring 3
+* Виртуална и физическа памет
+
+## ARM
+
+### ARM
+
+* Първи процесор - ARMv2, 1985 г.
+* 32 битов, 64 битов (съвсем скоро, ARMv8)
+* RISC
+* Може да превключва м/у little и big endian
+* Основна архитектура на повечето мобилни устройства
+    * Евтини
+    * Ниско потребление на енергия
+    * Прости
+* Много производители (ARM само лицензират архитектурата)
+
+### Регистри, 32 bit
+
+* 16 бр. 32-битови регистъра, R0-R15
+* R0 - return result
+* R1-R12 - general purpose
+* R13 - stack pointer
+* R14 - link register
+* R15 - program counter
+* CSPR - Current Program State Register
+
+### Регистри, 64bit
+
+* SP, PC са отделни регистри
+* 32 бр. 64-битови регистъра, X0-X31
+* X0 - return result
+* X1-X7 - function arguments
+* X8-X28 - general purpose
+* X29 - frame pointer (GCC)
+* X30 - link register
+* X31 или XZR - always zero
+* Долната 32битова част е достъпна чрез W регистър
+   * като RAX/EAX в x86
+* По принцип приложението им е конвенция, не е enforce-нато от нещо
+
+### Режими
+
+* ARM може да обработва инструкциите в няколко режима
+* ARM mode - 32 бита, aligned
+* THUMB - 16 бита за инструкция, aligned
+* THUMB2 - 16/32 бита за инструкция
+* Jazelle - Java bytecode
+* Режимите може да се превключват
+    * доста полезно при писане на return-oriented shellcode
+
+### Calling convention
+
+* LR - link register (R14/X30) съхранява return адреса
+* На следващото повикване return address-а се запазва в стека
+
+# Асемблер
+
+## Синтаксис
+
+### Синтаксиси
+
+* Два - intel и AT&T
+* AT&T - gcc, unix-и
+* Intel - windows, visual studio
+
+### Intel
+
+~~~~~~~asm
+$SG2989 DB      'hello, world', 0AH, 00H
+
+main    PROC
+        sub     rsp, 40
+        lea     rcx, OFFSET FLAT:$SG2923
+        call    printf
+        xor     eax, eax
+        add     rsp, 40
+        ret     0
+main    ENDP
+~~~~~~~
+
+### AT&T
+
+~~~~~~~asm
+.LC0:
+        .string "hello, world\n"
+main:
+        pushl   %ebp
+        movl    %esp, %ebp
+        andl    $-16, %esp
+        subl    $16, %esp
+        movl    $.LC0, (%esp)
+        call    printf
+        movl    $0, %eax
+        leave
+        ret
+~~~~~~~
+
+
+### Основни разлики
+
+* АT&Т: $16 == intel: 10h
+* a=b: AT&T: mov b, a == intel: mov a, b
+* В AT&T има суфикс на инструкциите за размера на операнда (q,l,w,b)
+* В AT&T се слага % преди името на регистъра
+
+## инструкции
+
+###
+#### Инструкции/x86
+
+### Основни
+
+* MOV/MOVSX/MOVZX
+* NOP
+    * AND EAX,EAX и други вариации
+* INT, SYSCALL (x86_64)
+
+### Аритметика
+
+* ADD/ADC/INC (add, add with carry, increment)
+* SUB/SBB
+* MUL/IMUL
+* DIV/IDIV
+* SHL/SHR
+* XCHG
+
+### Логически
+
+* AND, OR, XOR
+* NOT
+
+### Branching
+
+* CMP
+* JMP
+* Jcc
+    * JE, JNE
+    * JZ, JNZ
+    * и много много други
+
+### Stack
+
+* PUSH X
+     * movl X, (%esp)
+     * subl $4, %esp
+* POP X
+     * movl (%esp), X
+     * addl $4, %esp
+
+###
+#### Инструкции/ARM
+
+### Основни
+
+* Повечето инструкции работят само с регистри
+* LDRB, LDRH, LDRW
+* STRB, STRH, STRW
+* SWC
+
+### Предикати на инструкции
+
+* Почти всяка инструкция може да има условие за изпълнение
+
+~~~~~~C
+    while (i != j)
+    {
+       if (i > j)
+       {
+           i -= j;
+       }
+       else  /* i < j (since i != j in while condition) */
+       {
+           j -= i;
+       }
+    }
+~~~~~~
+
+### Предикати на инструкции - асемблер
+
+~~~~~~asm
+loop: CMP  Ri, Rj        ; set condition "NE" if (i != j),
+                         ;               "GT" if (i > j),
+                         ;            or "LT" if (i < j)
+      SUBGT  Ri, Ri, Rj  ; if "GT" (Greater Than), i = i-j;
+      SUBLT  Rj, Rj, Ri  ; if "LT" (Less Than), j = j-i;
+      BNE  loop          ; if "NE" (Not Equal), then loop
+~~~~~~
+
+
+### Branching
+
+* CMP, CMN, TST, TEQ
+* B - branch
+* BL - branch with link
+* BLX - branch with link and exchange
+     * сменя режима на процесора
+* BXJ - сменя до Jazelle mode
+
+### Flag set suffix
+
+* Ако добавим S към инструкция, тя update-ва флаговете
+* ADDS, SUBS...
+* т.е. можем да ползваме *S вместо CMP от време на време
+     * като има страничен ефект, не само проверка
+
+### Смяна на режими
+
+* Всъщност, всяка инструкция, която зарежда PC (R15 в arm32) сменя режима
+* Гледа се най-младшия бит
+* ADC, ADD, AND, ASR, BIC, EOR, LSL, LSR, MOV, MVN,
+* ORR, ROR, RRX, RSB, RSC, SBC, SUB.
+
+
+## Изводи
+###
+#### Изводи
+
+* x86 асемблерът е огромен
+* arm е доста по-изчистен и гъвкав
+* и двата не са особено прости
+* и двата дават много възможности
+
+# Shellcode
+
+## Stack overflow
+
+###
+#### Stack overflows
+
+### Кратко обяснение
+
+* Презаписваме променлива с по-голям размер
+* Презаписваме return address-а с наш
+* На тоя адрес има наш код
+* Адресът може да е в стека или някъде другаде
+
+### Примерен код
+
+~~~~~~C
+#include <string.h>
+ 
+void foo (char *bar)
+{
+   char  c[12];
+ 
+   strcpy(c, bar);  // no bounds checking
+}
+ 
+int main (int argc, char **argv)
+{
+   foo(argv[1]);
+}
+~~~~~~
+
+###
+
+![overflow](overflow.png)
+
+### Анатомия на shellcode при stack overflow
+
+* NOP sled
+* Code
+* Return address
+
+### execve()
+
+~~~~~~C
+int execve(const char *filename, char *const argv[],
+                  char *const envp[]);
+~~~~~~
+
+* EAX - syscall number (11)
+* EBX - filename
+* ECX - argv[]
+* EDX - envp[]
+* regparam=4 calling convention
+
+### C код
+
+~~~~~~C
+char *filename="//bin/sh";
+char *argv[2];
+
+argv[0]=filename;
+argv[1]=NULL;
+
+execve(filename, argv, NULL);
+~~~~~~
+
+### Примерен код
+
+~~~~~~asm
+section .text
+_start:
+xor eax, eax    ; EAX=0
+push eax        ; push 0 in the stack
+push 0x68732f6e ; PUSH //bin/sh in reverse i.e. hs/nib//
+push 0x69622f2f
+mov ebx, esp    ; Make EBX point to //bin/sh using ESP
+push eax        ; PUSH 0x00000000 using EAX 
+mov edx, esp    ; and point EDX to it using ESP
+push ebx        ; PUSH address of //bin/sh on the Stack
+mov ecx, esp    ; and make ECX point to it using ESP
+mov al, 11      ; move 11 into AL to avoid nulls
+int 0x80 
+~~~~~~
+
+### Стекът след изпълнението на кода
+
+![setupstack](setupstack.png)
+
+### Return address
+
+* В най-простия случай - не се променя и е в стека
+    * Това не работи от години
+* Налучкване
+    * При достатъчно голям NOP sled не е толкова трудно
+* Друг hack
+    * Имаме някъде наблизо адрес на контролирана от нас памет
+* Return-into-libc или return-oriented-programming
+    * Следващия път :)
+
+## Heap overflow
+
+###
+#### Heap overflow
+
+### Heap overflow
+
+* Целим да презапишем указател към функция
+    * или нещо подобно
+* Целим да объркаме memory allocator-а
+
+# Return-oriented programming
+
+## идея
+
+###
+#### Return-oriented programming
+
+### Идея
+
+* Поредица от return адреси в кода на програмата, които се връщат при нас
+* Парчета код, които са използваеми (gadgets)
+     * Намиращи се на фиксирани позиции
+* Много полезно в cisco IOS и други
+
+## Return-into-libc
+
+### return-into-libc
+
+* най-простия пример за подобно нещо
+* гледаме да направим стек с аргументи и да идем на system()
+
+### Стек
+
+![stack frame](stackframe.png)
+
+### Какво ни трябва
+
+* адресът на system()
+* адрес на string "/bin/sh"
+* За предпочитане е и в двата адреса да няма нулев байт
+
+###
+
+![returntolibc](returntolibc-mod.png)
+
+## ROP chaining
+
+### ROP chaining
+
+* Изпълняване на повече от една функция
+* С този return адрес можем да изпълним две
+* А ако искаме повече?
+
+### Gadgets
+
+* Малки парчета код, които правят нещо
+* Завършват на ret
+* Могат да модифицират регистри или памет
+* Много трудно за писане на ръка, има компилатори
+* Много hack-ове като unalinged инструкции, смяна на режима
