@@ -73,6 +73,7 @@
 
 ###
 
+![stack frame-full](fullstackframe.png)
 
 ### Memory protection
 
@@ -466,4 +467,7 @@ int 0x80
 
 ### Инструменти
 
+* IDA pro
+* objdump
 * Metasploit
+* ropgadgets
