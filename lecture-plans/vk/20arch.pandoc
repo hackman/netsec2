@@ -63,13 +63,16 @@
     * RBP показва къде започва текущия stack frame
 * Heap-а е паметта, дадена на процеса за други нужди
 
-### stack/heap
+###
 
-![stack and heap](stackheap-mod.png)
+![stack and heap](stackheap.png)
 
 ###
 
 ![stack frame](stackframe.png)
+
+###
+
 
 ### Memory protection
 
@@ -208,7 +211,7 @@ main:
 
 ### Branching
 
-* CMP
+* CMP, TEST
 * JMP
 * Jcc
     * JE, JNE
@@ -441,7 +444,7 @@ int 0x80
 
 ###
 
-![returntolibc](returntolibc-mod.png)
+![returntolibc](returntolibc.png)
 
 ## ROP chaining
 
@@ -458,3 +461,9 @@ int 0x80
 * Могат да модифицират регистри или памет
 * Много трудно за писане на ръка, има компилатори
 * Много hack-ове като unalinged инструкции, смяна на режима
+
+## Tools
+
+### Инструменти
+
+* Metasploit
