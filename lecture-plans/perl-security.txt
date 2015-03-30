@@ -15,7 +15,7 @@ Execution:
 	perl interpreter -> script file
 
 
-exec() vs `` vs  system()
+exec() vs `` vs  system() vs qx//
 
 	$username = param ("username");
 	system("cat /home/pesho/$username");
