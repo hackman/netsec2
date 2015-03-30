@@ -1,5 +1,5 @@
 % x86 и ARM
-% архитектури и асемблер
+% Архитектури, асемблер, exploit-и
 % Vasil Kolev \<vasil@ludost.net\>
 
 # Основи на архитектурите
@@ -301,7 +301,7 @@ loop: CMP  Ri, Rj        ; set condition "NE" if (i != j),
 * и двата не са особено прости
 * и двата дават много възможности
 
-# Shellcode
+# Buffer overflow exploitation
 
 ## Stack overflow
 
@@ -343,6 +343,12 @@ int main (int argc, char **argv)
 * Code
 * Return address
 
+### Особености на кода
+
+* Printable characters
+* ... или поне не може да съдържа \\0, понеже се минава през string функции
+* Честа употреба на отрицателни числа или странни константи
+
 ### execve()
 
 ~~~~~~C
@@ -368,7 +374,7 @@ argv[1]=NULL;
 execve(filename, argv, NULL);
 ~~~~~~
 
-### Примерен код
+### Shellcode на assembly
 
 ~~~~~~asm
 section .text
@@ -398,8 +404,10 @@ int 0x80
     * При достатъчно голям NOP sled не е толкова трудно
 * Друг hack
     * Имаме някъде наблизо адрес на контролирана от нас памет
-* Return-into-libc или return-oriented-programming
-    * Следващия път :)
+    * Environment variable
+    * Command-line argument
+* Return-oriented programming
+    * след малко :)
 
 ## Heap overflow
 
@@ -412,9 +420,50 @@ int 0x80
     * или нещо подобно
 * Целим да объркаме memory allocator-а
 
+### Memory allocator
+
+* malloc()/free()
+* заделят памет в heap-а
+* поддържат структура със заделените парчета
+
+### Нов attack vector - PLT
+
+* Procedural linkage table
+* Адреси на различни функции
+* free(), malloc(), strcpy()...
+* Адресът е сравнително ясен
+* Ако можем да пишем там, можем да насочим изпълнението на някоя функция към наш код
+
+### Картинка
+
+### Работа на free()
+
+~~~~~~C
+struct chunk {
+        int prev_size;
+        int size;
+        struct chunk *fd;
+        struct chunk *bk;
+};
+~~~~~~
+* някъде в кода на free() има
+
+~~~~~~C
+  bck = p->bk;
+  fwd = p->fd;
+  fwd->bk = bck;
+  bck->fd = fwd;
+~~~~~~
+
+### Exploit
+
+* презаписваме bk и fd
+* ако подадем bk=A и fd=B, можем да постигнем \*(A+12) = B и \*(B+8) = A.
+* ... и просто можем да запишем в PLT на мястото на следващата извиквана функция някой наш адрес
+
 # Return-oriented programming
 
-## идея
+## Идея
 
 ###
 #### Return-oriented programming
@@ -428,10 +477,10 @@ int 0x80
 
 ## Return-into-libc
 
-### return-into-libc
+### Return-into-libc
 
-* най-простия пример за подобно нещо
-* гледаме да направим стек с аргументи и да идем на system()
+* Най-простия пример за подобно нещо
+* Гледаме да направим стек с аргументи и да идем на system()
 
 ### Стек
 
@@ -439,8 +488,8 @@ int 0x80
 
 ### Какво ни трябва
 
-* адресът на system()
-* адрес на string "/bin/sh"
+* Адресът на system()
+* Адрес на string "/bin/sh"
 * За предпочитане е и в двата адреса да няма нулев байт
 
 ###
