@@ -103,7 +103,7 @@
 * R13 - stack pointer
 * R14 - link register
 * R15 - program counter
-* CSPR - Current Program State Register
+* CPSR - Current Program State Register
 
 ### Регистри, 64bit
 
