@@ -45,7 +45,8 @@
 * Segment registers - CS, DS, SS, ES, FS, GS (16bit)
 * Pointer registers - SP, BP (8-64bit)
     * ползват се за стека
-* Index registers - SL, DL
+* Index registers - SI, DI
+    * general purpose в x86_64
 * Instruction pointer registers - IP
 * Куп други за FPU, MMX, SSE...
 
