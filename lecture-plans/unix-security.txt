@@ -66,6 +66,11 @@ Chrooting
 - chroot + chdir
 
 Namespaces
+- User
+- PID
+- IPC
+- Mount
+- UTC
 - clone
 - unshare
 - setns
