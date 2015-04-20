@@ -4,3 +4,82 @@
 - Working with capabilities
 - Namespaces & chroot
 - Filesystem ACLs
+
+
+
+Kernel exploitation
+- Different subsystems
+- Visibility issues
+- Arbitrary code execution kcore, kallsyms
+- loadable modules (CAP_SYS_MODULE)
+
+Linker issues
+- ld.so
+- ld.so.conf
+- the $ORIGIN
+	readelf -a
+- LD_PRELOAD
+- LD_LIBRARY_PATH
+- LD_DEBUG slwodown
+- LD_AUDIT CVE-2010-3847
+
+
+Dropping privileges
+- What is RUID/EUID/SUID
+- What is setuid binary
+- initgroups	- /etc/group
+- setgroups		- list of groups
+- setuid/gid	- Set effective but clean saved
+- seteuid/gid   - Effective
+- setreuid/gid  - Real + Effective
+- setresuid/gid	- Real + Effective + Saved
+
+Capabilities
+- What the hell is it?
+     P'(permitted) = (P(inheritable) & F(inheritable)) |
+                     (F(permitted) & cap_bset)
+
+     P'(effective) = F(effective) ? P'(permitted) : 0
+
+     P'(inheritable) = P(inheritable)    [i.e., unchanged]
+
+     P         denotes the value of a thread capability set before the execve(2)
+     P'        denotes the value of a capability set after the execve(2)
+     F         denotes a file capability set
+     cap_bset  is the value of the capability bounding set 
+- File capabilities
+
+
+Filesystem ACLs
+- How to do a file read check 
+	- access()		- RUID
+	- faccessat()	- 
+	- euidaccess()	- EUID
+- How to do a permissions check... 
+	- stat() 
+	- acl_get_file()/acl_get_fd()
+		-> acl_get_entry() -> acl_get_permset() -> acl_get_perm()
+- Differences between stat() and lstat()
+
+Inheritance
+- Process execution
+- UID/GID/groups
+- Opened files
+- Limits
+- Capabilities
+- Root directory
+- Namespace
+
+
+Links:
+ Linker issues: https://www.nth-dimension.org.uk/pub/BTL.pdf
+ Linker attack: http://seclists.org/fulldisclosure/2010/Oct/257
+ Cheating the ELF: https://grugq.github.io/docs/subversiveld.pdf
+ Kernel exploitation: http://www.win.tue.nl/~aeb/linux/hh/hh-12.html
+ https://www.kernel.org/doc/Documentation/security/credentials.txt
+ https://www.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.2/capfaq-0.2.txt
+ http://linux.die.net/man/7/capabilities
+ https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Storage_Administration_Guide/ch-acls.html
+ https://wiki.archlinux.org/index.php/Access_Control_Lists
+
+ 
