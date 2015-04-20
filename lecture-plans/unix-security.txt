@@ -60,6 +60,15 @@ Filesystem ACLs
 	- acl_get_file()/acl_get_fd()
 		-> acl_get_entry() -> acl_get_permset() -> acl_get_perm()
 - Differences between stat() and lstat()
+- UMASK
+
+Chrooting
+- chroot + chdir
+
+Namespaces
+- clone
+- unshare
+- setns
 
 Inheritance
 - Process execution
