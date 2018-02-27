@@ -4,41 +4,60 @@
 
 # General Issues of the scripting languages
 
-## DoS caused by the way they are executed
+## General Issues
 
+* Weak typing
+* Code injection
+	* File inclusion
+	* Evaluation
+	* Regular Expression Injection
+	* Flawed File Inclusion Logic
+	* Path Traversal
+* SQL injection
+	* Information Leakage
+	* Disclosure Of Stored Data
+	* Manipulation of Stored Data
+	* Bypassing Authorisation Controls
+	* Defenses Against SQL Injection
+
+## DoS caused by the way they are executed
 * Common Gateway Interface RFC 3875 - CGI/1.1
-	+ timeouts between the CGI and the server
-	+ security issues based on the way the CGI is executed
-		- directly
-		- suexec
-		- chrooted
-		- daemon(fcgi/fpm/PSGI/WSGI...)
-	+ Resource limits (ulimits)
+	* timeouts between the CGI and the server
+	* security issues based on the way the CGI is executed
+		* directly
+		* suexec
+		* chrooted
+		* daemon(fcgi/fpm/PSGI/WSGI...)
+	* Resource limits (ulimits)
 * Crash the web server when running as module in it
 * Eat all the memory of the server in FCGI, FPM and similar setups
 
-# Interpreter problems
+## Interpreter problems
 
-## Bad implementations
+### Bad implementations
+
 * CVE-2005-0088 - Python information disclosure
-* Call to the PHP interpreter without any parameters makes it hang :)
+* Call to the PHP interpreter without any parameters makes it hang 
 
-## Bad configuration
+### Bad configuration
+
 * CVE-1999-0509 - Perl, sh, csh and etc. were placed in publicly accessiable folder
 * PHP-CGI setup initially used Apache actions, which allowed direct access to the interpreter
 * Enabling verbose debug messages on errors
 
-## Memory leaks
+### Memory leaks
 
 * Causing DoS
 * Causing information disclosure
 
-## Faulty implementation of system functions
-- Parsing images with PHP code in them can result in the PHP code being executed
-- Parsing images with Python's PIL library can allow arbitrary code execution
-- Python's tempfile.mktemp() is vulnerable to Race condition
+### Faulty implementation of system functions
 
-## Bad handling of environment variables (bad environment sanitation)
+* Parsing images with PHP code in them can result in the PHP code being executed
+* Parsing images with Python's PIL library can allow arbitrary code execution
+* Python's tempfile.mktemp() is vulnerable to Race condition
+
+### Bad handling of environment variables (bad environment sanitation)
+
 * All - PATH
 * Perl - PERLLIB & PERL5OPT
 * Python -  PYTHONHOME & PYTHONPATH
@@ -49,17 +68,102 @@
 
 ## Bad language designs 
 * Register_globals in PHP
-	+ responsible for **MILLIONS** of compromised sites
-* Ruby's mass-assignment vulnerability
-	+ in 2012 Egor Homakov **OWNED** GitHub because of this
+	* responsible for **MILLIONS** of compromised sites
+* Ruby\'s mass-assignment vulnerability
+	* in 2012 Egor Homakov **OWNED** GitHub because of this
 * + in JavaScript
 * ===/!== in JavaScript and PHP
 * = vs == in C/C++ 
 * variable context in Perl
 * case/switch with fall-trough
 
-# Awkward and rarely understood language specifics
+### JavaScript's +
+~~~~
+  x = "5" + 6
+~~~~
+
+* Will the above code produce 11 or "56"?
+
+### JavaScript and PHP ===/!==
+
+== is equal
+=== is equal... but also of the same type
+
+* Usually NULL is verified
+
+### C/C++'s  = and ==
+
+* = is used for asigning values
+	* can be easily mispelled
+
+~~~
+  for ( i = 0, i = 12; i++ ) {
+
+  }
+  if ( a = 42 ) {
+
+  }
+~~~
+
+### Perl variable's context
+
+~~~
+my @a=(12, 15, 8);
+my $count = scalar(@a);
+print "S: ", scalar(@a), "\n#: ", $#a, "\n";
+S: 3
+#: 2
+
+for (my $i = 0; $i <= $count; $i++) {
+
+}
+~~~
+
+### C style switch/case statements
+
+~~~
+switch(expression){
+    case var1:
+       setup1_var(s);
+    case var2:
+       setup2_var(s);
+       break;
+    default : 
+       demo(s);
+}
+~~~
+
+### Awkward and rarely understood language specifics
 * var = (condition) ? TRUE : FALSE;
 * Perl - 3 parameter open()
-* PHP GPC order
+* PHP variables_order
 * SSL (disabling verification)
+
+### Perl three part open
+~~~
+    open FILEHANDLE,EXPR
+    open FILEHANDLE,MODE,EXPR
+    open FILEHANDLE,MODE,EXPR,LIST
+    open FILEHANDLE,MODE,REFERENCE 
+
+	open (my $fh, '>', $user_file);
+            vs.
+	open (my $fh, "<$user_file");
+
+~~~
+
+### PHP variables_order and GPC order
+
+* variables_order
+	* EGPCS (Environment, Get, Post, Cookie, and Server) 
+* GPC
+	* When magic_quotes are on, all ' (single-quote), " (double quote), \ (backslash) and NULL's are escaped with a backslash automatically. 
+
+### Special characters
+
+* Difference between "" and ''
+
+* Difference between '' and ``
+
+* Difference between system() and ``
+
