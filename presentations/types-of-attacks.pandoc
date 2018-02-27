@@ -205,11 +205,11 @@ for (i = 0; i OP 5; i++)  {
 
 # Return into library
 
-- What you don't have executable stack memory?
+- What if you don't have executable stack memory?
 
 # Return into library
 
-- What you don't have executable stack memory?
+- What if you don't have executable stack memory?
 	+ You still have the libraries the application has loaded..
 	+ Think about unlink() or printf()
 
@@ -230,9 +230,12 @@ for (i = 0; i OP 5; i++)  {
 # Direct Input
 - Never trust user input
 - User input is
-  + data recieved from a USER(which may also be API)
-  + data received from files
-  + data received from the network
+	+ data received as cmd line parameters
+	+ data recieved from a USER(which may also be API)
+	+ data received from files
+	+ data received from environment
+	+ data received from the network
+	+ user controlled system settings (limits)
 - Do not use blacklists... use whitelists instead
 - Check the type of the data
 - Keep in mind charsets
@@ -248,7 +251,7 @@ fd = open("file", O_WRONLY);
 write(fd, buffer, sizeof(buffer))
 ~~~~
 
-## time of check to time of use
+## time of check to time of use (TOCTOU)
 
 # Race conditions
 - non re-entrent functions (DB, Shared mem, files)
@@ -258,4 +261,23 @@ write(fd, buffer, sizeof(buffer))
 # Timing
 
 
+# Information disclosure
+
+- path disclosure
+- software version disclosure
+- user data disclosure (GDPR)
+- sensitive data disclosure (usernames and passwords)
+- architecture
+- logs
+
+# Code
+
+- remote code execution
+- remote code inclusion
+- local/remote command execution
+- local/remote privilege escalation
+
+# SQL injection
+
+# Side channels
 
