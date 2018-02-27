@@ -1,0 +1,25 @@
+1. kernel protections, като показвам какво правят в няколко картинки :)
+- ASLR (Kernel space, User space, MMAP)
+- NX bit ( loader protection)
+- mprotect (mmap, protection)
+2. една примерна програмка с gets :)
+3. показвам buffer overflow-a
+4. компилирам със stack protector
+5. Обяснявам различните stack protector механизми
+6. показвам го в малко код
+
+http://upx.sourceforge.net/
+
+http://www.hackitoergosum.org/2010/HES2010-prascagneres-Stack-Smashing-Protector-in-FreeBSD.pdf
+http://wiki.osdev.org/Stack_Smashing_Protector
+A Comparison of Buffer Overflow Prevention Implementations and Weaknesses  - https://www.blackhat.com/presentations/bh-usa-04/bh-us-04-silberman/bh-us-04-silberman-paper.pdf
+Mprotect - https://pax.grsecurity.net/docs/segmexec.txt
+
+Fortify source: https://idea.popcount.org/2013-08-15-fortify_source/
+Stack protector: https://lwn.net/Articles/584225/
+
+
+EBP - Frame pointer
+EIP - Instruction pointer
+
+
