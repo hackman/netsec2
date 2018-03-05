@@ -2,6 +2,10 @@
 - ASLR (Kernel space, User space, MMAP)
 - NX bit ( loader protection)
 - mprotect (mmap, protection)
+       PROT_NONE  The memory cannot be accessed at all
+       PROT_READ  The memory can be read
+       PROT_WRITE The memory can be modified
+       PROT_EXEC  The memory can be executed
 2. една примерна програмка с gets :)
 3. показвам buffer overflow-a
 4. компилирам със stack protector
@@ -21,5 +25,6 @@ Stack protector: https://lwn.net/Articles/584225/
 
 EBP - Frame pointer
 EIP - Instruction pointer
+ESP - Stack pointer
 
 
