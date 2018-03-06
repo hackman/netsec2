@@ -20,20 +20,31 @@
 Useful links:
   http://www.win.tue.nl/~aeb/linux/hh
   http://www.phrack.org/issues/49/14.html#article
-  http://www.cs.berkeley.edu/~daw/teaching/cs261-f07/reading/beyondsmashing.pdf
   http://en.wikipedia.org/wiki/NX_bit
-  http://www.sans.edu/student-files/presentations/heap_overflows_notes.pdf
-  http://www.mathyvanhoef.com/2013/02/understanding-heap-exploiting-heap.html
-  http://people.cs.umass.edu/~emery/pubs/06-28.pdf  (HeapShield)
-  https://lirias.kuleuven.be/bitstream/123456789/430509/1/heapsentry_dimva2013.pdf
-  http://www.blackhat.com/presentations/bh-usa-04/bh-us-04-silberman/bh-us-04-silberman-paper.pdf
-  http://phrack.org/issues/66/15.html Linux Kernel Heap Tampering Detection
-  http://www.fort-knox.org/files/younan_malloc.pdf
-  http://web.archive.org/web/20121010025025/http://www.cs.cmu.edu/~dbrumley/pubs/integer-ndss-07.pdf RICH
-  https://www.owasp.org/index.php?title=Integer_overflow&setlang=en
-  http://www.fefe.de/intof.html Integer overflows
-  http://www.exploit-db.com/wp-content/themes/exploit/docs/28478.pdf Off-by-one
-  http://www.hpenterprisesecurity.com/vulncat/en/vulncat/cpp/buffer_overflow_off_by_one.html
-  https://cseweb.ucsd.edu/~hovav/dist/rop.pdf Return oriented programming
-  https://www.blackhat.com/presentations/bh-usa-08/Shacham/BH_US_08_Shacham_Return_Oriented_Programming.pdf
+  Integer overflow:
+    http://web.archive.org/web/20121010025025/http://www.cs.cmu.edu/~dbrumley/pubs/integer-ndss-07.pdf RICH
+    https://www.owasp.org/index.php?title=Integer_overflow&setlang=en
+    http://www.fefe.de/intof.html Integer overflows
+  Heap Overflow:
+    http://www.sans.edu/student-files/presentations/heap_overflows_notes.pdf
+    http://www.mathyvanhoef.com/2013/02/understanding-heap-exploiting-heap.html
+  Buffer Overflow:
+    http://www.blackhat.com/presentations/bh-usa-04/bh-us-04-silberman/bh-us-04-silberman-paper.pdf
+    http://www.cs.berkeley.edu/~daw/teaching/cs261-f07/reading/beyondsmashing.pdf
+    http://www.hpenterprisesecurity.com/vulncat/en/vulncat/cpp/buffer_overflow_off_by_one.html
+  Off-by-one:
+    http://www.exploit-db.com/wp-content/themes/exploit/docs/28478.pdf
+
+Papers:
+  FormatGuard 2001 - http://www.nxnw.org/~steve/papers/formatguard-sec01.pdf
+  HeapShield 2006  - http://people.cs.umass.edu/~emery/pubs/06-28.pdf
+  HeapSentry 2013  - https://securitee.org/files/heapsentry_dimva2013.pdf
+  Allocators
+    Younan malloc  - http://www.fort-knox.org/files/younan_malloc.pdf
+    FreeGuard      - https://www.utdallas.edu/~zhiqiang.lin/file/CCS17c.pdf 
+    jemalloc       - http://jemalloc.net/ https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf
+    http://phrack.org/issues/66/15.html Linux Kernel Heap Tampering Detection
+  Return oriented programming 
+    - https://cseweb.ucsd.edu/~hovav/dist/rop.pdf
+    - https://www.blackhat.com/presentations/bh-usa-08/Shacham/BH_US_08_Shacham_Return_Oriented_Programming.pdf
 
