@@ -5,7 +5,10 @@
 int main (int argc, char **argv) {
 	char buf[10] = { '\0' };
 	int x = 1; 
-	snprintf(buf, sizeof(buf), argv[1]);
+
+//	snprintf(buf, sizeof(buf), "%s", argv[1]);	// here is a simple fix
+
+	snprintf(buf, sizeof(buf), argv[1]);		// the actual exploit
 	buf[sizeof(buf)-1] = 0;
 	printf("Buffer size is: (%d) \nData input: %s \n", strlen(buf), buf);
 	printf("in hex: %#x\nMemory address for x: (%p) \n", x, &x);
