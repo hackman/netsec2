@@ -34,6 +34,8 @@ Useful links:
     http://www.hpenterprisesecurity.com/vulncat/en/vulncat/cpp/buffer_overflow_off_by_one.html
   Off-by-one:
     http://www.exploit-db.com/wp-content/themes/exploit/docs/28478.pdf
+  Format string:
+    http://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html
 
 Papers:
   FormatGuard 2001 - http://www.nxnw.org/~steve/papers/formatguard-sec01.pdf
@@ -48,3 +50,5 @@ Papers:
     - https://cseweb.ucsd.edu/~hovav/dist/rop.pdf
     - https://www.blackhat.com/presentations/bh-usa-08/Shacham/BH_US_08_Shacham_Return_Oriented_Programming.pdf
 
+Libraries:
+  SafeStr - https://www.safaribooksonline.com/library/view/secure-programming-cookbook/0596003943/ch03s04.html
