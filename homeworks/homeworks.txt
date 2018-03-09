@@ -11,3 +11,10 @@ The task is simple, find security issues within the following software:
 Every proven security issue is elidgable for 1 to 3 points.
 
 If you have worked on any other opensource software and have reported a software security issue to them or want to work on auditing that code, please first consult with the teachers of the course.
+
+
+01 Compiled languages
+You have one config parser, which parses secrets.conf into keys and values.
+ - find out why you need the FIX define
+ - find out why you don't see pass5, pass6, pass7 and pass9
+ - explain how you solved both issues and how you found the actual problems
