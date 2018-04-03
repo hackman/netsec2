@@ -32,3 +32,7 @@ Executing applications:
 
 Running bash in restricted mode:	http://linux.die.net/man/1/bash
 	search for RESTRICTED SHELL
+
+Shellshock attack - https://blog.cloudflare.com/inside-shellshock/
+Patches for the attack - http://thread.gmane.org/gmane.comp.shells.bash.bugs/22190
+
