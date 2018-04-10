@@ -68,6 +68,7 @@ Regular Expressions issues:
 
 
 Useful links:
-  http://perldoc.perl.org/perlsec.html
-  http://www.cgisecurity.com/lib/sips.html
+  http://perldoc.perl.org/perlsec.html - Perl Security
+  http://www.cgisecurity.com/lib/sips.html - Security Issues in Perl Scripts
+  http://phrack.org/issues/55/7.html - Perl CGI problems
   
