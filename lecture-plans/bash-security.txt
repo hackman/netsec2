@@ -1,4 +1,4 @@
-Shellshock: http://en.wikipedia.org/wiki/Shellshock_%28software_bug%29
+Arrays and Hashes
 
 abuse of PATH
 $ program
@@ -29,6 +29,18 @@ Executing applications:
 	$(cmd)
 	exec cmd
 	/bin/bash cmd
+
+Subshells:
+user=111
+uid=12
+cut -d : -f 1,3,4 /etc/passwd|tr ':' ' '|while read user uid gid; do
+	echo "|$user|$uid|$gid|"
+done|tail -n5
+
+	/bin/bash (cut)
+		 \- /bin/bash (tr)
+			     \- /bin/bash (while)
+
 
 Running bash in restricted mode:	http://linux.die.net/man/1/bash
 	search for RESTRICTED SHELL
