@@ -1,0 +1,22 @@
+% PHP language
+% 
+
+# Configuration
+
+* build issues
+* configuration handling
+
+
+
+# Configuration
+* configuration handling
+  - php.ini
+  - scan dir
+  - local .ini files
+  - ini_set/ini_alter/ini_restore
+  - Apache related
+
+	php_value name value 
+	php_flag name on|off 
+	php_admin_value name value 
+	php_admin_flag name on|off
