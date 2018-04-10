@@ -38,6 +38,7 @@ Links:
   https://www.python.org/dev/peps/ - Index of Python Enhancement Proposals (PEPs)
   https://www.python.org/dev/peps/pep-0008/ - Style Guide for Python Code
   https://www.python.org/news/security/ - How to report security vulnerabilities to Python
+  https://www.cvedetails.com/product/18230/Python-Python.html?vendor_id=10210
 
 Useful tools:
   https://pypi.python.org/pypi/autopep8
