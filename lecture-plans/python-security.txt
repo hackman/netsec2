@@ -17,7 +17,7 @@ It is a comperhansive style guide!
 Now let's take a look at two major parts from the language:
  - C modules security
  - Python native issues
-    dangerous modules: json, pickle, cPickle
+    dangerous modules: json, yaml, marshal, pickle, cPickle
 
 Guidelines from OpenStack:
  - https://security.openstack.org/guidelines/dg_apply-restrictive-file-permissions.html
