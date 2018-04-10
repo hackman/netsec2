@@ -3,3 +3,44 @@
   - Code
   - Hash implementation(collisions)
   - general language issues
+
+Everything in Python is an Object... or it should have been :)
+ - types of objects are not backward compatible
+   bytes() in 2.x and in 3.x
+ - since everything is an object, comparrison between objects is a problem. Given that we have x of type int and y of type float, the next code should not work:
+   if x > y:
+
+A TON of people will tell you that PEP 8 is a Secure codding guideline.
+NO, IT ISN'T!
+It is a comperhansive style guide!
+
+Now let's take a look at two major parts from the language:
+ - C modules security
+ - Python native issues
+    dangerous modules: json, pickle, cPickle
+
+Guidelines from OpenStack:
+ - https://security.openstack.org/guidelines/dg_apply-restrictive-file-permissions.html
+ - https://security.openstack.org/guidelines/dg_avoid-dangerous-input-parsing-libraries.html
+ - https://security.openstack.org/guidelines/dg_avoid-shell-true.html
+ - https://security.openstack.org/guidelines/dg_use-subprocess-securely.html
+ - https://security.openstack.org/guidelines/dg_using-file-paths.html
+ - https://security.openstack.org/guidelines/dg_using-temporary-files-securely.html
+ - https://security.openstack.org/guidelines/dg_protect-sensitive-data-in-files.html
+ - https://security.openstack.org/guidelines/dg_strong-crypto.html
+ - https://security.openstack.org/guidelines/dg_cross-site-request-forgery-csrf.html
+ - https://security.openstack.org/guidelines/dg_cross-site-scripting-xss.html
+ - https://security.openstack.org/guidelines/dg_move-data-securely.html & https://security.openstack.org/guidelines/dg_validate-certificates.html
+ - How NOT to do it: https://security.openstack.org/guidelines/dg_use-oslo-rootwrap-securely.html
+
+Links:
+  http://www.pythonsecurity.org/
+  https://www.python.org/dev/peps/ - Index of Python Enhancement Proposals (PEPs)
+  https://www.python.org/dev/peps/pep-0008/ - Style Guide for Python Code
+  https://www.python.org/news/security/ - How to report security vulnerabilities to Python
+
+Useful tools:
+  https://pypi.python.org/pypi/autopep8
+  https://www.pylint.org/
+  https://wiki.openstack.org/wiki/Security/Projects/Bandit - Static code analisys
+  https://github.com/openstack/syntribos - Automated API security testing
