@@ -96,6 +96,7 @@ Parent routine's stack
 
 ## Protection?
 - Address space layout randomization
+	+ in order to work you need PIE binaries
 - Non-executable stack(requires the NX bit from the CPU)
 - PaX (NX emulation and much more)
 - Trampolines/StackGuard (gcc)
