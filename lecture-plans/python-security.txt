@@ -4,6 +4,16 @@
   - Hash implementation(collisions)
   - general language issues
 
+Python implementations
+ - Python
+ - Cython
+ - Jython
+ - PyPy
+
+Python Virtual Environment - http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
+PIP - https://pip.pypa.io/en/stable/
+
 Everything in Python is an Object... or it should have been :)
  - types of objects are not backward compatible
    bytes() in 2.x and in 3.x
@@ -14,10 +24,16 @@ A TON of people will tell you that PEP 8 is a Secure codding guideline.
 NO, IT ISN'T!
 It is a comperhansive style guide!
 
+String literals - https://docs.python.org/2/reference/lexical_analysis.html#string-literals
+ - take note to the prefixes of 'r' and 'R'
+ - A prefix of 'u' or 'U' makes the string a Unicode string
+ - r or R may be combined with u or U prefixes
+
 Now let's take a look at two major parts from the language:
  - C modules security
  - Python native issues
     dangerous modules: json, yaml, marshal, pickle, cPickle
+	picle code eval:  "S''*__import__('os').system('echo 0wn3d')\np0\n."
 
 Guidelines from OpenStack:
  - https://security.openstack.org/guidelines/dg_apply-restrictive-file-permissions.html
