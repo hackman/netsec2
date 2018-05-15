@@ -4,3 +4,63 @@
   - Hash implementation(collisions)
   - general language issues
  http://storage.btroyan.info/petko/ruby/#/21
+
+Interpreters
+ - Matz's Ruby Interpreter (MRI) / CRuby
+ - JRuby
+ - Rubinius
+ - mruby - used for IoT
+ - Opal - turns Ruby into JavaScript
+ - RubyMotion -  Ruby implementation (written using Objective-C and Cocoa)
+
+gem/bundle
+ - gem insecurity - http://guides.rubygems.org/security/
+
+Important style differences
+ - everything starting with capital letter is a constant (vars, classes)
+ - every variable starting with $ is a global variable... however there are thread global variables like $? and similar
+
+Since everything is na object and is mutable... The following code will break your apps :)
+ String = 42 
+
+
+The most influential frameworks
+ - Ruby on Rails
+ - Sinatra
+
+https://github.com/ankane/secure_rails
+
+Database of vulnerable gems:
+	https://github.com/rubysec/ruby-advisory-db
+
+Mass assignment:
+	https://en.wikipedia.org/wiki/Mass_assignment_vulnerability
+	https://code.tutsplus.com/tutorials/mass-assignment-rails-and-you--net-31695
+	Mass assignment saves you much work.
+--
+	def signup
+	  @user = User.create(params[:user])
+	end
+--
+	params[:user] #=> {:name => "ow3ned", :admin => true}
+--
+
+	Protection:
+		attr_accessible :name
+
+
+Ruby $SAFE
+	http://ruby-doc.com/docs/ProgrammingRuby/html/taint.html
+	https://bugs.ruby-lang.org/issues/8468
+
+Ruby Style Guide - https://github.com/bbatsov/ruby-style-guide
+
+RoR Security 
+  - https://guides.rubyonrails.org/security.html
+  - https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet
+  - Rails SQL injections https://rails-sqli.org/
+
+Ruby basic security info - https://ruby-doc.org/core-2.5.0/doc/security_rdoc.html
+
+Regexp only till \n 
+
