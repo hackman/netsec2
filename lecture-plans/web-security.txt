@@ -3,3 +3,94 @@
 - Hijacking
   - cookies
   - domains
+
+* How browsers work
+ - makeing the actual requests
+ - building the DOM tree
+ - applying CSS changes
+ - loading and executing JS
+ - WebSockets
+
+* Hijacking
+ - cookies and their options - https://tools.ietf.org/html/rfc6265#section-4.1
+  Set-Cookie: name=value; OPTIONS name2=value2; OPTIONS
+  Options can be:  expires / max-age / domain / path / secure / httponly / extension
+ - web application sessions are actually cookies in the browser and file/db storage linked to that cookie
+ - domains
+   registrar lock
+   transperant proxy (MITM)
+
+* Cross Site Scripting - XSS 
+  https://en.wikipedia.org/wiki/Cross-site_scripting
+  https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)
+
+* Cross Site Request Forgery - CSRF
+ - CSRF tokens are used mainly to prevent repetition of requests and requests that are done without prior access to the site
+ - useing CSRF tokens also prevent attacks based on the idea that the browser can perform actions of already authenticated users
+ - CSRF attacks can also be prevented using decent CORS Access-Control-Allow-Origin setup
+ https://en.wikipedia.org/wiki/Cross-site_request_forgery
+ https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)
+
+* Stealing data with CSS
+ https://www.mike-gualtieri.com/posts/stealing-data-with-css-attack-and-defense
+
+* Same Origin Policy - 
+ - originaly build to protect the DOM tree from modifications from locations outside the origin domain
+ It is URI, which means, that:
+   http://go.com != https://go.com
+   http://go.com != http://www.go.com
+ - generally applies to: Flash, Silverlight, PDF or Ajax(XMLHttpRequest) loading and also WebSockets
+ - relaxing the same origin policy:
+  document.domain property
+  Cross-Origin Resource Sharing (CORS)
+  Cross-document messaging (Calling the postMessage() method on a Window object asynchronously fires an "onmessage" event in that window and obviously all of its tabs)
+ - <script> and <link type=stylesheet > can load resources from everywhere :(
+
+https://en.wikipedia.org/wiki/Same-origin_policy
+https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy (read the IE exception)
+
+* Cross Origin Resource Sharing
+  Request headers:
+  - Origin
+  - Access-Control-Request-Method
+  - Access-Control-Request-Headers
+  Response headers:
+  - Access-Control-Allow-Origin
+  - Access-Control-Allow-Credentials
+  - Access-Control-Expose-Headers
+  - Access-Control-Max-Age
+  - Access-Control-Allow-Methods
+  - Access-Control-Allow-Headers
+
+* Standard HTTP headers
+ - Cache-control - https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+ - Pragma - https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
+ - Content-MD5 - https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.15
+ - Range - https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+ - Retry-After - https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37
+
+* New HTTP headers
+ - Strict Transport Security (HSTS) - Strict-Transport-Security 
+    https://tools.ietf.org/html/rfc6797#section-8.1
+ - HTTP Public Key Pining (HPKP) - Public-Key-Pins / Public-Key-Pins-Report-Only
+ - Expect-CT
+
+ - Subrequest Integrity (SRI)
+    Content-Security-Policy: require-sri-for script;
+ - X-Content-Type-Options: nosniff
+    - simply put, tell the browser to honor the MIME type and not try to guess what is the type of the file
+ - X-XSS-Protection
+   - works only on IE
+ - X-Frame-Options
+   - protect your page from frame injections
+ - X-Permitted-Cross-Domain-Policies
+   - controls the access for Flash and PDF readers
+ - Referrer-Policy
+   - used to prevent leaking data via the referrer header
+
+* Content Security Policy (CSP)
+ Content-Security-Policy / Content-Security-Policy-Report-Only
+ https://content-security-policy.com/
+ https://www.w3.org/TR/CSP2/
+ http://benv.ca/csp-talk-2013
+
