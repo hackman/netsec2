@@ -1,0 +1,37 @@
+
+JavaScript Strict mode
+ - available since ECMAScript5
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+
+Memory Management
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management
+
+Closuers
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+
+WebSockets security
+ - https://resources.infosecinstitute.com/websocket-security-issues/
+ 
+
+JavaScript Equality :)
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+ - https://dorey.github.io/JavaScript-Equality-Table/
+
+Client-side storage
+ - LocalStorage vs. IndexedDB
+   LocalStorage can store strings
+   IndexedDB can store any type of JS object
+ - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage
+ - Storage is shared per-domain, wich means that two applications on the same domain can see each other's client-side data
+  https://www.w3.org/TR/webdatabase/#cross-directory-attacks 
+ - local storage is not encrypted, access to the storage file can reveal potentially dangerous data
+
+JavaScript preventDefault()
+ - https://www.w3schools.com/jsref/event_preventdefault.asp
+ - https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+ - https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
+
+https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet
+
+
