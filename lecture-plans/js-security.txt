@@ -1,4 +1,10 @@
 
+NaN vs. undefined vs. null vs. false
+
+JavaScript Equality :)
+ - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+ - https://dorey.github.io/JavaScript-Equality-Table/
+
 JavaScript Strict mode
  - available since ECMAScript5
  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
@@ -14,14 +20,11 @@ WebSockets security
  - https://resources.infosecinstitute.com/websocket-security-issues/
  
 
-JavaScript Equality :)
- - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
- - https://dorey.github.io/JavaScript-Equality-Table/
-
 Client-side storage
- - LocalStorage vs. IndexedDB
+ - LocalStorage vs. IndexedDB vs. Web SQL
    LocalStorage can store strings
    IndexedDB can store any type of JS object
+   Web SQL allows SQL to be used directly on the client side, by JavaScript
  - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage
  - Storage is shared per-domain, wich means that two applications on the same domain can see each other's client-side data
   https://www.w3.org/TR/webdatabase/#cross-directory-attacks 
@@ -34,4 +37,15 @@ JavaScript preventDefault()
 
 https://www.owasp.org/index.php/AJAX_Security_Cheat_Sheet
 
+What not to do:
+ - Do not try to put password protection inside JavaScript
+ - Do not try to put business logic ONLY on the client side
+ - Do not make input validation ONLY on the client side
+
+Dangerous JavaScript
+ - Code: eval(), Function(), setTimeout(), setInterval() and so on.
+ - URL based: location.assign()
+ - HTML based: document.write(), innerHtml vs. innerText
+ - XHR calls: postMessage, BroadcastChannel client-side storage and other JavaScript variables
+   https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API
 
