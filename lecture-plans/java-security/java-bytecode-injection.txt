@@ -1,0 +1,13 @@
+Java code compiles into bytecode (Foo.java ->> Foo.class). Bytecode injection is modifying Foo.classat runtime to inject code into it right before its loaded and run.
+
+Imagine a scenario where I want to find out how many times method
+
+public void bar();
+
+is invoked in Foo.class. I could write an agent using java.lang.instrument that intercepts Foo.class during class load, modifies it using ASM so that bar() calls com.amir.agent.incrementCount() on method entry.
+
+Now I can run my program:
+
+$java -javagent:MyAgent Foo  //assuming Foo has a main() defined
+
+and at runtime, Foo.class will not only do its normal work, it will also do work I defined in MyAgent each time bar() is invoked.
