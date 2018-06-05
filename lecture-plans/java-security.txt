@@ -3,3 +3,43 @@
   - Code
   - Hash implementation(collisions)
   - general language issues
+
+JVM
+ - can run Java, Scala, Haskell(Eta)
+ - has its own security module java.security.manager
+  https://docs.oracle.com/javase/7/docs/technotes/guides/security/PolicyFiles.html
+	java -Djava.security.managerMyApplication
+	java -Djava.security.manager=default MyApplication
+
+	java.lang.SecurityManager class
+	java.lang.System.getSecurityManager()
+	java.lang.System.setSecurityManager()
+
+ * AllPermission(): Permission to all resources.
+ * FilePermission(String fileName, String access): Permissions for file access. Access string can contain "read," "write," "delete," and "execute" separated by commas.
+	java.security.AccessController.checkPermission(permission);
+ * SocketPermission(String address,String access): Permissions for network socket connections. Address string can be in URL or IP form; access string can contain "accept" and "connect" operations.
+ * PropertyPermission(String prop,String access): Permissions for property settings.
+  https://docs.oracle.com/javase/6/docs/technotes/guides/security/spec/security-specTOC.fm.html
+  
+Java can run scripting languages
+ - ScriptEngineManager
+	https://docs.oracle.com/javase/7/docs/api/javax/script/ScriptEngineManager.html
+ - JavaScript
+    https://www.owasp.org/index.php/Code_injection_in_Java
+ - LUA
+
+Application servers
+ - TomCat
+  - JSP :(
+ - JBoss
+
+Applets... hope you never work with these :)
+
+SEI CERT Coding Standard for Java
+  https://wiki.sei.cmu.edu/confluence/display/java/SEI+CERT+Oracle+Coding+Standard+for+Java
+
+Android Secure Coding Standard
+  https://wiki.sei.cmu.edu/confluence/display/android/Android+Secure+Coding+Standard
+
+
